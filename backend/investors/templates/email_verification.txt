@@ -1,0 +1,12 @@
+Hi {{ wave|safe }} {{ firstname|lower }}.
+
+Welcome to {{ company|safe }}.
+
+Please click on the link below to verify your LibExTrades account.
+
+{{ url }}
+
+This link will expire in 3 minutes.
+
+Thanks,
+The {{ company|safe }} Team.

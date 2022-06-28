@@ -1,0 +1,8 @@
+*.sh
+*.env
+__pycache__
+venv/
+logs/
+backend/email
+backend/staticfiles
+backend/mediafiles
