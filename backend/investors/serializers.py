@@ -1,3 +1,4 @@
+from dj_rest_auth import serializers as dj_rest_auth_serializer
 from .models import InvestorInvestment, InvestorWithdrawal
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
@@ -9,7 +10,10 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('groups', 'user_permissions', 'password', 'username', 'is_active', 'is_staff', 'is_superuser')
+        exclude = ('groups', 'user_permissions', 'username', 'is_active', 'is_staff', 'is_superuser')
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -59,3 +63,22 @@ class ResendEmailSerializer(serializers.Serializer):
             data['email'] = data['email'].lower()
 
         return super().to_internal_value(data)
+
+class CustomDjRestAuthLoginSerializer(dj_rest_auth_serializer.LoginSerializer):
+    """"
+    Custom dj_rest_auth Login_serializer class, subclassing the default LoginSerializer from dj_rest_auth
+    to get rid of the email field, because the username field can server both purposes.
+    """
+    username = serializers.CharField()
+    password = serializers.CharField()
+    email = None
+
+
+class CustomDjRestAuthJWTSerializer(dj_rest_auth_serializer.JWTSerializer):
+    """
+    Custom dj_rest_auth jwt_serializer class subclassing the default JWTSerializer to get rid of the user
+    instance data returned.
+    """
+    access_token = serializers.CharField()
+    refresh_token = serializers.CharField()
+    user = None

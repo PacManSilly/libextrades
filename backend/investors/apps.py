@@ -10,4 +10,4 @@ class InvestorsConfig(AppConfig):
     def ready(self) -> None:
         from . import signals
 
-        post_save.connect(signals.create_auth_token, sender=settings.AUTH_USER_MODEL, dispatch_uid=uuid.uuid4())
+        post_save.connect(signals.new_user, sender=settings.AUTH_USER_MODEL, dispatch_uid=uuid.uuid4())

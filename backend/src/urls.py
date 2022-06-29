@@ -1,7 +1,7 @@
 from django.views.generic import RedirectView
 from django.urls import path, include
 from investors.admin import admin_site
-from django.contrib import admin
+# from django.contrib import admin
 from django.conf import settings
 
 

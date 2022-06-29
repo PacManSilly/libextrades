@@ -141,11 +141,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_SUBJECT_PREFIX = 'LibExTrades',
 EMAIL_FILE_PATH = BASE_DIR / 'email/'
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'support@libextrades.com')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER', 'support@libextrades.com')
 
 # Django security Settings
 CSRF_COOKIE_SAMESITE = 'Lax'
@@ -157,10 +157,10 @@ SESSION_COOKIE_HTTPONLY = True
 # DjangoRestFramework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+        'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONOpenAPIRenderer',
@@ -169,6 +169,11 @@ REST_FRAMEWORK = {
 }
 
 # dj-rest-auth settings
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'investors.serializers.CustomDjRestAuthLoginSerializer',
+    'JWT_SERIALIZER': 'investors.serializers.CustomDjRestAuthJWTSerializer',
+}
+REST_USE_JWT = True
 REST_SESSION_LOGIN = False
 OLD_PASSWORD_FIELD_ENABLED = False
 REST_AUTH_PW_RESET_USE_SITES_DOMAIN = True
@@ -176,7 +181,7 @@ REST_AUTH_PW_RESET_USE_SITES_DOMAIN = True
 
 # Simple jwt settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=720),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,

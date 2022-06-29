@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core import validators
 from django.conf import settings
 from django.db import models
+import uuid
 
 
 GENDER = (
@@ -13,7 +14,7 @@ GENDER = (
 PLANS = (
     ('Starter plan', 'Starter plan'),
     ('Advance plan', 'Advance plan'),
-    ('Starter basic advance plan', 'Starter basic advance plan'),
+    ('Premium', 'Premium'),
     ('Sublime plan', 'Sublime plan'),
     ('Luxury plan', 'Luxury plan')
 )
@@ -69,11 +70,11 @@ class User(AbstractUser):
     Custom User model
     """
     # Identification
-    id = models.BigAutoField(_("ID"), unique=True, primary_key=True, editable=False, help_text=_("Database ID"))
+    id = models.CharField(_("ID"), default=uuid.uuid4, max_length=255, unique=True, primary_key=True, editable=False)
     username = models.CharField(_("Username"), max_length=50, blank=True, null=True)
     email = models.EmailField(
         _("Email Address"), unique=True, max_length=255, blank=False,
-        error_messages={"unique": _("Investor email address")}
+        error_messages={"unique": _("Investor with this email address already exists")}
     )
     phone = models.CharField(_("Phone Number"), max_length=50, blank=True, null=True, help_text=_("Investor phone number"))
     password = models.CharField(

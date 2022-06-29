@@ -1,15 +1,25 @@
+from rest_framework_simplejwt.views import TokenVerifyView
+from dj_rest_auth.jwt_auth import get_refresh_view
 from dj_rest_auth import views as dj_rest
 from django.urls import path
 from . import apis
 
 
 urlpatterns = [
+
+    # Authenication endpoint
+    path("auth/token/login/", dj_rest.LoginView.as_view(), name="login_via_token"),
+    path("auth/token/logout/", dj_rest.LogoutView.as_view(), name="logout_via_token"),
+    path("auth/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
+    path("auth/token/refresh/", get_refresh_view().as_view(), name="token_refresh"),
+
+    # users endpoint
     path('users/', apis.UserApiViewset.as_view({'get': 'list'}), name='users_list'),
     path('users/new/', apis.UserApiViewset.as_view({'post': 'create'}), name='users_create'),
-    path('users/<str:email>/', apis.UserApiViewset.as_view({'get': 'retrieve'}), name='users_detail'),
-    path('users/<str:email>/update/', apis.UserApiViewset.as_view({'put': 'update', 'patch': 'update'}), name='users_update'),
-    path('users/<str:email>/delete/', apis.UserApiViewset.as_view({'delete': 'destroy'}), name='users_delete'),
-    path("users/<str:email>/change/password/", dj_rest.PasswordChangeView.as_view(), name="users_change_password"),
+    path('users/me/', apis.UserApiViewset.as_view({'get': 'retrieve'}), name='users_detail'),
+    path('users/me/update/', apis.UserApiViewset.as_view({'put': 'update', 'patch': 'update'}), name='users_update'),
+    path('users/me/delete/', apis.UserApiViewset.as_view({'delete': 'destroy'}), name='users_delete'),
+    path("users/me/change/password/", dj_rest.PasswordChangeView.as_view(), name="users_change_password"),
 
     # Investors investments endpoints
     path('investments/', apis.InvestorInvestmentApiViewset.as_view({'get': 'list'}), name='investments_list'),
