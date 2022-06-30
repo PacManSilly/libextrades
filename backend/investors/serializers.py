@@ -47,13 +47,18 @@ class InvestorInvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = InvestorInvestment
         fields = "__all__"
+        extra_kwargs = {
+            'investor': {'read_only': True}
+        }
 
 
 class InvestorWithdrawalSerializer(serializers.ModelSerializer):
     class Meta:
         model = InvestorWithdrawal
         fields = "__all__"
-
+        extra_kwargs = {
+            'investor': {'read_only': True}
+        }
 
 class ResendEmailSerializer(serializers.Serializer):
     email = serializers.EmailField()

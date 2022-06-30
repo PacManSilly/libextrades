@@ -14,7 +14,7 @@ GENDER = (
 PLANS = (
     ('Starter plan', 'Starter plan'),
     ('Advance plan', 'Advance plan'),
-    ('Premium', 'Premium'),
+    ('Premium plan', 'Premium plan'),
     ('Sublime plan', 'Sublime plan'),
     ('Luxury plan', 'Luxury plan')
 )
@@ -136,7 +136,7 @@ class InvestorInvestment(models.Model):
     #     verbose_name_plural = ''
 
     def __str__(self):
-        return F"{self.investor} - ({self.plan})"
+        return F"{self.investor} - ({self.plan}) - (${self.amount})"
 
 
 class InvestorWithdrawal(models.Model):
@@ -155,4 +155,4 @@ class InvestorWithdrawal(models.Model):
     amount = models.CharField(_("Amount"), max_length=50, blank=True, null=True, help_text=_("Amount to withdraw"))
 
     def __str__(self):
-        return F"{self.investor} - ({self.method}) - ({self.amount})"
+        return F"{self.investor} - ({self.method}) - (${self.amount})"

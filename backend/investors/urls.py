@@ -41,5 +41,5 @@ urlpatterns = [
 
     # Reset password via email endpoingt
     path("auth/help/password/reset/", dj_rest.PasswordResetView.as_view(), name="password_reset"),
-    path("api/auth/help/password/reset/confirm/<str:uidb64>/<str:token>/", dj_rest.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("auth/help/password/reset/confirm/<str:uidb64>/<str:token>/", dj_rest.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
 ]

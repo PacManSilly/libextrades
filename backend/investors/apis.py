@@ -30,7 +30,7 @@ class UserApiViewset(viewsets.GenericViewSet):
         Edited so as to return the object instance of the currently logged in user.
         """
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, emailk=self.request.user.email)
+        obj = get_object_or_404(queryset, email=self.request.user.email)
 
         self.check_object_permissions(self.request, obj)
         return obj
