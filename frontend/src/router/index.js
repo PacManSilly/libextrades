@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AccountView from "../views/AccountView.vue";
@@ -13,7 +14,45 @@ const router = createRouter({
     {
       path: "/account",
       name: "account",
+      redirect: {name: 'dashboard'},
       component: AccountView,
+      children: [
+        {
+          path: '/account/dashboard',
+          name: 'dashboard',
+          component: () => import("../components/AppAccountDashboard.vue")
+        },
+        {
+          path: '/account/profile',
+          name: 'myprofile',
+          component: () => import("../components/AppAccountProfile.vue")
+        },
+        {
+          path: '/account/deposit',
+          name: 'deposit',
+          component: () => import("../components/AppAccountDeposit.vue")
+        },
+        {
+          path: '/account/withdrawal',
+          name: 'withdrawal',
+          component: () => import("../components/AppAccountWithdrawal.vue")
+        },
+        {
+          path: '/account/copy-expert',
+          name: 'copyexpert',
+          component: () => import("../components/AppAccountCopyExpert.vue")
+        },
+        {
+          path: '/account/referral',
+          name: 'referral',
+          component: () => import("../components/AppAccountReferral.vue")
+        },
+        {
+          path: '/account/settings',
+          name: 'settings',
+          component: () => import("../components/AppAccountProfile.vue")
+        },
+      ]
     },
     {
       path: "/signin",

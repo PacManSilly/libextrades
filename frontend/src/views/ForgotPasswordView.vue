@@ -51,7 +51,7 @@ const loading = ref(false);
                 <!-- start of button -->
                 <div class="w-full flex flex-col gap-3 items-center">
                     <div class="w-full">
-                        <AppButtonVue name="Reset m password" />
+                        <AppButtonVue name="Reset my password" />
                     </div>
                     <div class="flex items-center gap-2 text-xs md:text-sm">
                         <p class="text-xs font-normal text-slate-500">Back to</p>
