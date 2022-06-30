@@ -12,9 +12,9 @@ import IconSetting from './icons/IconSetting.vue';
 </script>
 
 <template>
-    <div class="w-full h-screen min-h-[30rem]">
+    <div class="w-full h-screen">
 
-        <div class="w-full h-full flex flex-col gap-10 items-center bg-slate-800 py-20">
+        <div class="w-full h-full flex flex-col overflow-y-auto gap-10 items-center bg-slate-800 py-20">
 
             <!-- start of logo -->
             <div>

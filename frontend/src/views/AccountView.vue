@@ -41,18 +41,20 @@ onMounted(() => {
 
 
             <!-- mobile version toggable -->
-            <div
-                :class="menu ? 'translate-x-0':'-translate-x-full'"
-                class="flex w-9/12 absolute top-0 bg-slate-800 overflow-hidden shadow-2xl transition transform duration-150 z-20 lg:hidden">
-                <AppAccountSideNavVue class=""/>
-            </div>
-            <!-- large screen version -->
-            <div class="hidden bg-slate-800 overflow-hidden shadow-2xl transition transform duration-150 md:w-5/12 lg:flex lg:w-2/12 lg:shadow-none">
-                <AppAccountSideNavVue class=""/>
+            <div class="fixed w-9/12 z-10 md:w-5/12 lg:w-3/12">
+                <div
+                    :class="menu ? 'translate-x-0':'-translate-x-full'"
+                    class="flex w-full absolute top-0 bg-slate-800 shadow-2xl transition transform duration-150 lg:hidden">
+                    <AppAccountSideNavVue class=""/>
+                </div>
+                <!-- large screen version -->
+                <div class="hidden bg-slate-800 transition transform duration-150 lg:flex">
+                    <AppAccountSideNavVue />
+                </div>
             </div>
 
             <!-- start of account main -->
-            <div @click="closeMenu" class="relative border w-full h-screen">
+            <div @click="closeMenu" class="fixed right-0 border w-full h-screen lg:w-9/12">
                 ss
             </div>
             <!-- start of account main -->
