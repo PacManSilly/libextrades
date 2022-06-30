@@ -20,7 +20,7 @@
                     <p class="text-white text-xl font-medium">Samuel L. Jackson</p>
                 </div>
 
-                <div class="flex flex-col gap-2 w-full md:w-5/12">
+                <div class="flex flex-col gap-2 w-full md:w-9/12 lg:w-6/12 xl:w-5/12">
                     <div class="flex justify-between">
                         <span class="text-slate-500 text-sm font-medium">Account ID:</span>
                         <span class="text-xs text-white bg-cyan-600 p-1 rounded md:text-sm">qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>

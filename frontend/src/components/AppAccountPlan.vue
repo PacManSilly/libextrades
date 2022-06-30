@@ -8,8 +8,12 @@ const props = defineProps({
     plan: {type: String, default: "Plan"},
     price: {type: String, default: "Price"},
     days: {type: String, default: "days"},
-    roi: {type: String, default: '%'}
+    roi: {type: String, default: '%'},
+    id: {type: String}
 })
+
+// emits
+defineEmits(['deposit'])
 </script>
 
 <template>
@@ -41,7 +45,7 @@ const props = defineProps({
             </div>
 
             <div class="w-full p-8">
-                <AppButton name="Deposit" />
+                <AppButton @click.prevent="$emit('deposit', props.id)" name="Deposit" />
             </div>
 
         </div>

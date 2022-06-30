@@ -8,7 +8,7 @@ import VueTradingView from 'vue-trading-view/src/';
 
         <div class="w-full h-full flex flex-col">
 
-            <div class="flex flex-col gap-2 mt-10 mb-10 md:mt-0">
+            <div class="flex flex-col gap-2 mt-10 mb-10 lg:mt-0">
                 <h1 class="text-white text-4xl font-black">Dashboard</h1>
                 <span class="text-slate-600 font-normal tracking-wide">Welcome, Samuel</span>
             </div>

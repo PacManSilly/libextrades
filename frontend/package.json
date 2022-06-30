@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
@@ -11,7 +11,8 @@
     "pinia": "^2.0.14",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",
-    "vue-trading-view": "^1.0.1"
+    "vue-trading-view": "^1.0.1",
+    "vue3-clipboard": "^1.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
