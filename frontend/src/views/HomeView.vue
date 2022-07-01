@@ -3,8 +3,8 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <main>
-    <RouterLink :to="{ name: 'signup' }">Sign Up</RouterLink>
-    <RouterLink :to="{ name: 'account' }">Account</RouterLink>
+  <main class="pl-20">
+    <RouterLink :to="{ name: 'signup' }" class="text-xl pr-10 text-white">Sign Up</RouterLink>
+    <RouterLink :to="{ name: 'account' }" class="text-2xl text-white">Account</RouterLink>
   </main>
 </template>

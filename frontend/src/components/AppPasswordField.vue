@@ -9,6 +9,8 @@ import IconEyeOpenVue from './icons/IconEyeOpen.vue';
 const props = defineProps({
   modelValue: { type: String },
   label: { type: String, default: "Password" },
+  minlength: { type: Number, default: 8 },
+  required: { type: Boolean, default: true },
   placeholder: {type: String, default: "Enter password..."},
 });
 // emits
@@ -33,6 +35,8 @@ const showPassword = ref(false)
                 :type="showPassword ? 'text':'password'"
                 :name="props.label"
                 :id="props.label"
+                :required="required"
+                :minlength="minlength"
                 :placeholder="placeholder"
                 class="w-full p-2 bg-slate-100 text-xs text-slate-700 rounded-sm ring-blue-500 ring-offset-2
                 ring-offset-slate-900 transition-all duration-150 group-hover:ring-2 group-focus:ring-2

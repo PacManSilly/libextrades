@@ -17,7 +17,7 @@ defineEmits(['deposit'])
 </script>
 
 <template>
-    <div class="w-full h-full">
+    <div class="w-full h-full min-h-full">
 
         <div class="bg-white rounded-md flex flex-col overflow-hidden">
 

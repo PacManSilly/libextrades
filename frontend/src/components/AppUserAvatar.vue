@@ -1,6 +1,10 @@
 <script setup>
 /* eslint-disable */
 import { onMounted, ref } from 'vue';
+import { useUserStore } from '../stores/user';
+
+// store
+const store = useUserStore()
 
 // data
 const active = ref(false)
@@ -34,7 +38,7 @@ onMounted(() => {
             enter-active-class="transition-all duration-150"
             leave-to-class="scale-0 opeacity-0"
             leave-active-class="transition-all duration-150">
-            <button @click.prevent v-if="active" class="absolute w-24 -left-14 top-15 mt-2 p-2 font-mediu bg-slate-100 rounded-sm transition-all duration-150 hover:bg-blue-500 hover:text-slate-100">
+            <button @click.prevent="store.signOut" v-if="active" class="absolute w-24 -left-14 top-15 mt-2 p-2 font-mediu bg-slate-100 rounded-sm transition-all duration-150 hover:bg-blue-500 hover:text-slate-100">
                 Sign Out
             </button>
         </transition>

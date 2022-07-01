@@ -4,7 +4,7 @@ import VueTradingView from 'vue-trading-view/src/';
 </script>
 
 <template>
-    <div class="w-full h-full min-h-[55rem]">
+    <div class="w-full h-full min-h-full">
 
         <div class="w-full h-full flex flex-col">
 

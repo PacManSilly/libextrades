@@ -1,6 +1,7 @@
 <script setup>
 /* eslint-disable */
 import { ref } from 'vue';
+import { useUserStore } from '../stores/user';
 import { RouterLink } from 'vue-router';
 import AppInputFieldVue from '../components/AppInputField.vue';
 import AppButtonVue from '../components/AppButton.vue';
@@ -8,10 +9,21 @@ import IconLongLeftVue from '../components/icons/IconLongLeft.vue'
 import AppLogoVue from '../components/AppLogo.vue'
 import AppPasswordFieldVue from '../components/AppPasswordField.vue';
 
-const error = ref(false)
-const email = ref("");
+// store
+const store = useUserStore()
+
+// data
+const email = ref(JSON.parse(window.localStorage.getItem('libex_email')));
 const password = ref("");
-const loading = ref(false);
+
+// methods
+const signIn = () => {
+    const data = {
+        username: email.value,
+        password: password.value,
+    }
+    store.signIn(data)
+}
 </script>
 
 <template>
@@ -23,7 +35,7 @@ const loading = ref(false);
         <div class="w-full flex items-center justify-between">
             <AppLogoVue />
             <RouterLink :to="{name: 'home'}" class="flex items-center gap-2 group">
-                <IconLongLeftVue class="group-hover:animate-bounce-h" />
+                <IconLongLeftVue class="w-7 h-7 fill-slate-500 group-hover:animate-bounce-h" />
                 <p class="text-blue-500 hover:text-blue-600">Home</p>
             </RouterLink>
         </div>
@@ -37,12 +49,19 @@ const loading = ref(false);
                 <span class="text-sm text-slate-500">Sign into your LibExTrades account.</span>
             </header>
 
-            <form @submit.prevent class="w-full flex flex-col gap-5 md:gap-10">
+            <form @submit.prevent="signIn" class="w-full flex flex-col gap-5 md:gap-10">
 
                 <!-- start of handle errors  -->
-                <ul v-if="error" class="flex flex-col text-sm text-red-500 list-inside list-disc">
-                    <li>error holder</li>
-                </ul>
+                <transition
+                    enter-from-class="-translate-y-5 opacity-0"
+                    enter-active-class="transitiona-ll duration-150"
+                    leave-to-class="-translate-y-5 opacity-0"
+                    leave-active-class="transitiona-ll duration-150">
+                    <ul v-if="store.userSignIn.error || store.userSignIn.success" class="flex flex-col text-xs list-inside md:text-sm">
+                        <li v-if="store.userSignIn.error" class="text-red-600">{{store.userSignIn.error}}</li>
+                        <li v-if="store.userSignIn.success" class="text-green-600">Signed in successful. Redirecting...</li>
+                    </ul>
+                </transition>
 
                 <!-- start of form fields -->
                 <div class="flex flex-col gap-4">
@@ -57,7 +76,7 @@ const loading = ref(false);
                 <!-- start of button -->
                 <div class="w-full flex flex-col gap-3 items-center">
                     <div class="w-full">
-                        <AppButtonVue name="Sign In" />
+                        <AppButtonVue name="Sign In" :loading="store.userSignIn.loading" />
                     </div>
                     <div class="flex items-center gap-2 text-xs md:text-sm">
                         <p class="text-xs font-normal text-slate-500">Don't have an account?</p>

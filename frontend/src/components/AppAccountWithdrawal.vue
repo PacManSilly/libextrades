@@ -56,9 +56,9 @@ const withdrawal = (id) => {
                 <span class="text-slate-600 font-normal tracking-wide">Select a withdrawal method</span>
             </div>
 
-            <div class="w-full flex flex-col gap-20 mt-10 items-center justify-between md:justify-center">
-                <div class="flex gap-5">
-                    <button v-for="tab in tabs" :key="tab.id" @click.prevent="withdrawal(tab.id)" class="px-4 py-2 border border-slate-500 rounded text-slate-500 font-medium text-lg transition-all duration-150 hover:bg-slate-800 hover:text-white">
+            <div class="w-full flex flex-col gap-10 mt-10 items-center justify-between md:gap-20 md:justify-center">
+                <div class="flex gap-3">
+                    <button v-for="tab in tabs" :key="tab.id" @click.prevent="withdrawal(tab.id)" class="px-2 py-1 border border-slate-500 rounded text-slate-500 font-medium text-base transition-all duration-150 hover:bg-slate-800 hover:text-white md:text-lg md:px-4 md:py-2">
                         {{tab.type}}
                     </button>
                 </div>

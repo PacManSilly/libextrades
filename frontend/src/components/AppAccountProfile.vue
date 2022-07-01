@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="w-full h-full">
+    <div class="w-full h-full min-h-full">
 
         <div class="w-full h-full flex flex-col">
 
@@ -11,7 +11,7 @@
                 <h1 class="text-white text-4xl font-black">Investor Profile</h1>
             </div>
 
-            <div class="flex flex-col gap-10">
+            <div class="flex flex-col items-center gap-10 md:items-start">
                 
                 <div class="flex flex-col gap-1">
                     <div class="w-40 h-40 flex items-center justify-center bg-slate-800">

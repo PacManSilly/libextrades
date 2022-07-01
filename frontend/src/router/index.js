@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, useRouter } from "vue-router";
+import { useUserStore } from '../stores/user';
 import HomeView from "../views/HomeView.vue";
 import AccountView from "../views/AccountView.vue";
 
@@ -15,6 +16,7 @@ const router = createRouter({
       path: "/account",
       name: "account",
       redirect: {name: 'dashboard'},
+      meta: {requiresAuth: true},
       component: AccountView,
       children: [
         {
@@ -50,7 +52,7 @@ const router = createRouter({
         {
           path: '/account/settings',
           name: 'settings',
-          component: () => import("../components/AppAccountProfile.vue")
+          component: () => import("../components/AppAccountSetting.vue")
         },
       ]
     },
@@ -80,5 +82,14 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach((to, from) => {
+  const user = useUserStore()
+
+  if (to.meta.requiresAuth && !JSON.parse(localStorage.getItem('libex_token'))) {
+    user.userSignIn.redirect = to.fullPath
+    return {name: 'signin', query: {redirect: to.fullPath}}
+  }
+})
 
 export default router;

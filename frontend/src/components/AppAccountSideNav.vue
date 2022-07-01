@@ -19,7 +19,7 @@ const route = useRoute()
 </script>
 
 <template>
-    <div class="w-full h-screen">
+    <div class="w-full h-screen min-h-full">
 
         <div class="w-full h-full flex flex-col overflow-y-auto gap-10 items-center bg-slate-800 py-20">
 

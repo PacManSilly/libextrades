@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.102']
 
 
 # Application definition
@@ -216,4 +216,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://192.168.1.102:3000'
 ]
+CORS_ALLOW_CREDENTIALS = True
