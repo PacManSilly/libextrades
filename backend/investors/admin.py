@@ -15,8 +15,8 @@ class UserModelAdmin(UserAdmin):
     add_form = CustomAppUserCreationForm
     form = CustomAppUserChangeForm
 
-    list_display = ('id', 'first_name', 'last_name', 'email', 'is_verified')
-    list_display_links = ('email', )
+    list_display = ('id', 'email', 'phone', 'first_name', 'last_name', 'is_verified')
+    list_display_links = ('id', 'email', )
     list_filter = ('is_verified', )
 
     add_fieldsets = (
@@ -25,7 +25,7 @@ class UserModelAdmin(UserAdmin):
     )
 
     fieldsets = (
-        ("Identification", {"fields": ("id", "email", "password", "kyc_front_view", "kyc_back_view"), }),
+        ("Identification", {"fields": ("id", "email", "phone", "password", "kyc_front_view", "kyc_back_view"), }),
         ("Bio", {"fields": ("first_name", "last_name", "other_name", "dob", "gender", "mugshot"), }),
         ("Location", {"fields": ("country", "state", "city", "postal", )}),
         ("Status", {"fields": ("is_verified", "is_active", "is_staff", "is_superuser"), }),
@@ -40,11 +40,16 @@ class UserModelAdmin(UserAdmin):
 
 class InvestorInvestmentAdmin(admin.ModelAdmin):
     model = InvestorInvestment
+    list_display = ('id', 'investor', 'plan', 'amount', 'created', 'status')
+    list_display_links = ('id', 'investor')
+    list_filter = ('plan', 'investor', 'created')
 
 
 class InvestorWithdrawalAdmin(admin.ModelAdmin):
     model = InvestorWithdrawal
-    list_filter = ('method', )
+    list_display = ('id', 'investor', 'method', 'created')
+    list_display_links = ('id', 'investor')
+    list_filter = ('method',)
 
 
 admin_site = MyAdmin(name='admin')

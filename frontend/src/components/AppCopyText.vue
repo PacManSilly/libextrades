@@ -32,7 +32,7 @@ const copy = () => {
 
         <!-- start of button to copy text -->
         <div>
-            <button @click.prevent="copy" :class="data.copied ? 'bg-blue-400 scale-125':'bg-slate-900'" class="text-xs text-slate-100 p-2 rounded-lg duration-300 shadow-md md:text-sm">
+            <button @click.prevent="copy" :class="data.copied ? 'bg-blue-400 scale-125':'bg-slate-800'" class="text-xs text-slate-100 p-2 rounded-lg duration-300 shadow-md md:text-sm">
                 <slot name="copy" v-if="!data.copied">Copy</slot>
                 <slot name="copied" v-else-if="data.copied">Copied!!!</slot>
             </button>

@@ -29,8 +29,9 @@ onMounted(() => {
         <button
             @click.prevent="active = !active"
             :class="active ? 'ring-2':''"
-            class="flex items-center justify-center h-10 w-10 ring-white ring-offset-2 ring-offset-slate-900 bg-slate-800 rounded-full transition-all duration-150 hover:ring-2">
-            <p class="font-black text-2xl text-white">S</p>
+            class="flex items-center justify-center h-10 w-10 overflow-hidden ring-white ring-offset-2 ring-offset-slate-900 bg-slate-800 rounded-full transition-all duration-150 hover:ring-2">
+            <img v-if="store.userData.data" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
+            <p v-else class="font-black text-2xl text-white">S</p>
         </button>
 
         <transition

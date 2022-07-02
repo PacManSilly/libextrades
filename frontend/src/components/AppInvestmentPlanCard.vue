@@ -5,11 +5,12 @@ import AppButton from './AppButton.vue';
 
 // props
 const props = defineProps({
+    loading: {type: Boolean, default: false},
     plan: {type: String, default: "Plan"},
     price: {type: String, default: "Price"},
     days: {type: String, default: "days"},
     roi: {type: String, default: '%'},
-    id: {type: String}
+    id: {type: Number},
 })
 
 // emits
@@ -45,7 +46,7 @@ defineEmits(['deposit'])
             </div>
 
             <div class="w-full p-8">
-                <AppButton @click.prevent="$emit('deposit', props.id)" name="Deposit" />
+                <AppButton @click.prevent="$emit('deposit', props.id)" name="Deposit" :loading="loading" />
             </div>
 
         </div>

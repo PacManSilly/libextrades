@@ -37,7 +37,7 @@ def save_image(instance, filename):
     Function to return the file path to save the mugshot of
     an investor.
     """
-    return F"investors/{instance.id}/images/{filename}"
+    return F"mediafiles/investors/{instance.id}/images/{filename}"
 
 
 class UserManager(BaseUserManager):
@@ -129,7 +129,8 @@ class InvestorInvestment(models.Model):
     investor = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Investor"), on_delete=models.CASCADE)
     plan = models.CharField(_("Plan"), max_length=255, choices=PLANS, default='Starter plan', blank=False, null=False)
     amount = models.CharField(_("Amount"), max_length=50, blank=True, null=True, help_text=_("Amount invested in this plan"))
-    created = models.DateTimeField(_(""), auto_now=False, auto_now_add=True)
+    days = models.CharField(_("Days"), max_length=50, blank=True, null=True, default='')
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     status = models.CharField(_("Status"), choices=STATUS, max_length=10, default='Pending', help_text=_("Status of this investment"))
     
     # class Meta:
@@ -145,7 +146,7 @@ class InvestorWithdrawal(models.Model):
     """
     id = models.BigAutoField(_("ID"), unique=True, primary_key=True, editable=False, help_text=_("Database ID"))
     investor = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Investor"), on_delete=models.CASCADE)
-    created = models.DateTimeField(_(""), auto_now=False, auto_now_add=True)
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     method = models.CharField(_("Method"), max_length=50, choices=METHODS, blank=False, null=False, default='Bitcoin')
     address = models.CharField(_("Address"), max_length=255, blank=True, null=True, help_text=_("Wallet address"))
     email = models.CharField(_("Email"), max_length=255, blank=True, null=True, help_text=_("PayPal email address"))

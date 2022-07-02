@@ -25,22 +25,48 @@ const router = createRouter({
           component: () => import("../components/AppAccountDashboard.vue")
         },
         {
-          path: '/account/profile',
+          path: '/account/myprofile',
           name: 'myprofile',
           component: () => import("../components/AppAccountProfile.vue")
         },
         {
           path: '/account/deposit',
           name: 'deposit',
-          component: () => import("../components/AppAccountDeposit.vue")
+          redirect: {name: 'deposithistory'},
+          component: () => import("../components/AppAccountDeposit.vue"),
+          children: [
+            {
+              path: '',
+              name: 'deposithistory',
+              component: () => import("../components/AppAccountDepositHistory.vue"),
+            },
+            {
+              path: '/account/deposit/investments/plans',
+              name: 'investmentplan',
+              component: () => import("../components/AppAccountInvestmentPlan.vue"),
+            },
+          ]
         },
         {
           path: '/account/withdrawal',
           name: 'withdrawal',
-          component: () => import("../components/AppAccountWithdrawal.vue")
+          redirect: {name: 'withrawalhistory'},
+          component: () => import("../components/AppAccountWithdrawal.vue"),
+          children: [
+            {
+              path: '',
+              name: 'withrawalhistory',
+              component: () => import("../components/AppAccountWithdrawalHistory.vue"),
+            },
+            {
+              path: '/account/withdrawal/methods',
+              name: 'withrawalmethods',
+              component: () => import("../components/AppAccountWithdrawalMethod.vue"),
+            },
+          ]
         },
         {
-          path: '/account/copy-expert',
+          path: '/account/copyexpert',
           name: 'copyexpert',
           component: () => import("../components/AppAccountCopyExpert.vue")
         },

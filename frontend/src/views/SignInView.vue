@@ -29,7 +29,7 @@ const signIn = () => {
 <template>
 <div class="w-full h-full bg-slate-900">
 
-    <div class="w-9/12 h-full min-h-[30rem] flex flex-col gap-10 py-20 items-center mx-auto md:w-1/2 lg:w-3/12">
+    <div class="w-9/12 h-full min-h-[30rem] flex flex-col gap-10 py-20 items-center mx-auto md:w-1/2 lg:w-4/12">
 
         <!-- start of logo and back nav -->
         <div class="w-full flex items-center justify-between">

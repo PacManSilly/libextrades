@@ -1,6 +1,13 @@
 <script setup>
 /* eslint-disable */
+import { useUserStore } from '../stores/user';
 import VueTradingView from 'vue-trading-view/src/';
+
+// stores
+const store = useUserStore()
+
+// created
+store.getMe()
 </script>
 
 <template>
@@ -60,7 +67,10 @@ import VueTradingView from 'vue-trading-view/src/';
                     <span class="text-xl font-medium text-slate-600 tracking-wider">Live Chart</span>
                     <span>
                         <span class="text-sm font-medium text-slate-600 md:text-lg">Account Status:</span>
-                        <span class="text-sm font-medium text-red-600 ml-2 md:text-lg">Unverified</span>
+                        <span v-if="store.userData.data" :class="store.userData.data.is_verified ? 'text-green-600':'text-red-600'" class="text-sm font-medium ml-2 md:text-lg">
+                            <span v-if="store.userData.data.is_verified">Verified</span>
+                            <span v-else>Unverified</span>
+                        </span>
                     </span>
                 </div>
 
