@@ -119,6 +119,7 @@ class User(AbstractUser):
     postal = models.CharField(_("Postal/ZIP"), max_length=20, blank=True, null=True)
 
     # investment
+    investment_plan = models.CharField(_("Investment Plan"), max_length=255, blank=True, null=False, default="....", help_text=_("Investors investment plan"))
     total_investment = models.CharField(_("Total Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total investment"))
     current_investment = models.CharField(_("Current Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors currrent investment"))
     total_earnings = models.CharField(_("Total Earnings"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total earnings"))

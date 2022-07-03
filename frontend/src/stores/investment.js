@@ -15,7 +15,7 @@ export const useUserInvestment = defineStore({
             // user store
             const userStore = useUserStore()
             this.investments.loading = true
-            await axios.get('investments/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.get('api/investments/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
               .then((resp) => {
                 this.investments.loading = false
                 this.investments.error = null,
@@ -32,7 +32,7 @@ export const useUserInvestment = defineStore({
             // user store
             const userStore = useUserStore()
             this.newInvestment.loading = true
-            await axios.post('investments/new/', {...data}, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.post('api/investments/new/', {...data}, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.newInvestment.loading = false
                     this.newInvestment.error = null

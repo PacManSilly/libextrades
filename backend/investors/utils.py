@@ -16,7 +16,7 @@ def send_email_verification(email):
 
     domain = Site.objects.get_current().domain
     rel_link = reverse("verify_email",)
-    absolute_url = F"{domain}{rel_link}?token={token}"
+    absolute_url = F"http://{domain}/verify-account/email/?token={token}"
 
     body = render_to_string(
         'email_verification.txt',
@@ -48,7 +48,7 @@ def resend_email_verification(email):
 
         domain = Site.objects.get_current().domain
         rel_link = reverse("verify_email",)
-        absolute_url = F"{domain}{rel_link}?token={token}"
+        absolute_url = F"http://{domain}/verify-account/email/?token={token}"
 
         body = render_to_string(
             'resend_email_verification.txt',

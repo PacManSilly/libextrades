@@ -15,7 +15,7 @@ export const useUserWithdrawal = defineStore({
             // user store
             const userStore = useUserStore()
             this.withdrawals.loading = true
-            await axios.get('withdrawals/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.get('api/withdrawals/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
               .then((resp) => {
                 this.withdrawals.loading = false
                 this.withdrawals.error = null,
@@ -32,7 +32,7 @@ export const useUserWithdrawal = defineStore({
             // user store
             const userStore = useUserStore()
             this.newWithdrawal.loading = true
-            await axios.post('withdrawals/new/', {...data}, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.post('api/withdrawals/new/', {...data}, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.newWithdrawal.loading = false
                     this.newWithdrawal.error = null

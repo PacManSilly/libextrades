@@ -50,9 +50,9 @@ store.getMe()
         <button
             @click.prevent="active = !active"
             :class="active ? 'ring-2':''"
-            class="flex items-center justify-center h-10 w-10 overflow-hidden ring-white ring-offset-2 ring-offset-slate-900 bg-slate-800 rounded-full transition-all duration-150 hover:ring-2">
+            class="flex items-center justify-center h-10 w-10 overflow-hidden ring-blue-600 ring-offset-2 ring-offset-slate-900 bg-slate-100 rounded-full transition-all duration-150 hover:ring-2">
             <img v-if="store.userData.data.mugshot" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
-            <p v-else class="font-black text-2xl text-white">{{store.userData.data.first_name[0]}}</p>
+            <p v-else class="font-black text-2xl text-slate-900">{{store.userData.data.first_name[0]}}</p>
         </button>
 
         <transition

@@ -69,7 +69,7 @@ store.getMe()
                     </div>
                     <div class="flex justify-between">
                         <span class="text-slate-500 text-sm font-medium">Investment Plan:</span>
-                        <span class="text-xs text-white bg-pink-600 p-1 rounded md:text-sm">None</span>
+                        <span class="text-xs text-white bg-pink-600 p-1 rounded md:text-sm">{{store.userData.data.investment_plan}}</span>
                     </div>
                     <div class="flex justify-between">
                         <span class="text-slate-500 text-sm font-medium">Investment Currency:</span>

@@ -94,6 +94,7 @@ class ResendVerifyEmail(viewsets.GenericViewSet):
 
 
 class VerifyEmail(views.APIView):
+    authentication_classes = []
     permission_classes = []
 
     def get(self, request, *args, **kwargs):
@@ -124,7 +125,7 @@ class VerifyEmail(views.APIView):
                 return Response(data={"detail": _("Email address verified successfully")}, status=status.HTTP_200_OK)
 
             return Response(
-                data={"detail": _("Your email address has already been verified")},
+                data={"error": _("Your email address has already been verified")},
                 status=status.HTTP_400_BAD_REQUEST
             )
 

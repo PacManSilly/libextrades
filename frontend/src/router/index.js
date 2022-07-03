@@ -112,6 +112,23 @@ const router = createRouter({
       component: () => import("../views/ForgotPasswordView.vue"),
     },
     {
+      path: "/auth/help/password/reset/confirm/:uid/:token",
+      name: "resetpassword",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/ResetPasswordView.vue"),
+      props: true
+    },
+    {
+      path: "/verify-account/email/",
+      name: "verifyaccount",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/VerifyAccountView.vue"),
+    },
+    {
       path: "/signup",
       name: "signup",
       // route level code-splitting

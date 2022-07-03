@@ -17,15 +17,28 @@ export const useUserStore = defineStore({
     actions: {
         async signUp(data) {
             this.userSignUp.loading = true
-            await axios.post("users/new/", data, {headers: {"Content-Type": "multipart/form-data"}})
+            this.userSignUp.success = false
+            this.userSignUp.error = null
+
+            await axios.post("api/users/new/", data, {headers: {"Content-Type": "multipart/form-data"}})
                 .then((resp) => {
+                    this.userSignUp.success = true
                     this.userSignUp.error = null
                     this.userSignUp.loading = false
                     localStorage.setItem('libex_email', JSON.stringify(resp.data.email))
-                    this.userSignUp.success = true
 
-                    // redirect to login page
-                    this.$router.push({name: 'signin'})
+                    // clear all localStorage data
+                    localStorage.removeItem('libex_user')
+                    localStorage.removeItem('libex_investments')
+                    localStorage.removeItem('libex_withdrawals')
+                    localStorage.removeItem('libex_traders')
+
+                    setTimeout(() => {
+                        this.userSignUp.success = null
+                        // redirect to login page
+                        this.$router.push({name: 'signin'})
+                    }, 3000);
+
                 })
                 .catch((err) => {
                     this.userSignUp.loading = false
@@ -42,7 +55,7 @@ export const useUserStore = defineStore({
 
             this.userSignIn.loading = true
             this.userSignIn.error = null
-            await axios.post("auth/token/login/", {...data})
+            await axios.post("api/auth/token/login/", {...data})
                 .then((resp) => {
                     this.userSignIn.error = null
                     this.userSignIn.loading = false
@@ -75,7 +88,7 @@ export const useUserStore = defineStore({
         },
         async getMe() {
             this.userData.loading = true
-            await axios.get("users/me/", {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.get("api/users/me/", {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.userData.error = null
                     this.userData.loading = false
@@ -93,7 +106,7 @@ export const useUserStore = defineStore({
             this.profileUpdate.success = null
             this.profileUpdate.error = null
 
-            await axios.put('users/me/update/', data, {headers: {'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.put('api/users/me/update/', data, {headers: {'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.profileUpdate.loading = false
                     this.profileUpdate.error = null
@@ -120,7 +133,7 @@ export const useUserStore = defineStore({
             this.profileUpdate.success = null
             this.profileUpdate.error = null
 
-            axios.post('users/me/change/password/', data, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            axios.post('api/users/me/change/password/', data, {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.profileUpdate.loading = false
                     this.profileUpdate.error = null

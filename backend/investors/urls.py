@@ -44,8 +44,4 @@ urlpatterns = [
     # Email verification endpoint
     path('verify-email/', apis.VerifyEmail.as_view(), name='verify_email'),
     path("resend-email/", apis.ResendVerifyEmail.as_view({'post': 'post'}), name="resend_verification_email"),
-
-    # Reset password via email endpoingt
-    path("auth/help/password/reset/", dj_rest.PasswordResetView.as_view(), name="password_reset"),
-    path("auth/help/password/reset/confirm/<str:uidb64>/<str:token>/", dj_rest.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
 ]

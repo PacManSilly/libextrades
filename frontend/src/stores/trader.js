@@ -18,7 +18,7 @@ export const useUserTrader = defineStore({
             this.traders.loading = true
             this.traders.error = null
             
-            await axios.get('experts/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
+            await axios.get('api/experts/', {headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem('libex_token'))}`}})
                 .then((resp) => {
                     this.traders.loading = false
                     this.traders.error = null
@@ -38,7 +38,7 @@ export const useUserTrader = defineStore({
             this.addTrader.loading = false
             this.addTrader.error = null
 
-            await axios.put(`experts/${data.traderId}/update/`, {...data})
+            await axios.put(`api/experts/${data.traderId}/update/`, {...data})
                 .then((resp) => {
                     this.addTrader.loading = false
                     this.addTrader.error = null
