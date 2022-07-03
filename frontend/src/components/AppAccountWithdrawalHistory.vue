@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useUserWithdrawal } from '../stores/withdrawal';
 import IconLongRight from './icons/IconLongRight.vue';
+import IconCreditCard from './icons/IconCreditCard.vue'
 import AppWithdrawalCard from './AppWithdrawalCard.vue'
 
 // store

@@ -1,5 +1,5 @@
+from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders
 from dj_rest_auth import serializers as dj_rest_auth_serializer
-from .models import InvestorInvestment, InvestorWithdrawal
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -8,6 +8,10 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    mugshot = serializers.ImageField(required=False)
+    kyc_front_view = serializers.ImageField(required=False)
+    kyc_back_view = serializers.ImageField(required=False)
+
     class Meta:
         model = User
         exclude = ('groups', 'user_permissions', 'username', 'is_active', 'is_staff', 'is_superuser')
@@ -59,6 +63,13 @@ class InvestorWithdrawalSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'investor': {'read_only': True}
         }
+
+
+class ExpertTraderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExpertTraders
+        fields = "__all__"
+
 
 class ResendEmailSerializer(serializers.Serializer):
     email = serializers.EmailField()

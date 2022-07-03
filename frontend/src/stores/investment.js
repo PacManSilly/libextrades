@@ -26,7 +26,6 @@ export const useUserInvestment = defineStore({
                 this.investments.loading = false
                 if (err.response.status == 401) userStore.signOut()
                 else this.investments.error = "An error occured"
-                console.log(err)
               })
         },
         async createInvestment(data) {
@@ -37,7 +36,6 @@ export const useUserInvestment = defineStore({
                 .then((resp) => {
                     this.newInvestment.loading = false
                     this.newInvestment.error = null
-                    console.log(resp.data)
                     
                     // redirect to deposite history
                     this.$router.push({name: 'deposithistory'})
@@ -46,7 +44,6 @@ export const useUserInvestment = defineStore({
                     this.newInvestment.loading = false
                     if (err.response.status == 401) userStore.signOut()
                     else this.newInvestment.error = "error"
-                    console.log(err.response)
                 })
         },
     }

@@ -1,6 +1,6 @@
 <script setup>
 /* eslint-disable */
-import { onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, ref } from 'vue';
 import { useUserStore } from '../stores/user';
 
 // store
@@ -10,6 +10,25 @@ const store = useUserStore()
 const active = ref(false)
 const root = ref('')
 
+// computed 
+// const isMugshot = computed(() => {
+//     try {
+//         return store.userData.data.mugshot !== null
+//     }
+//     catch(err) {
+//         return false
+//     }
+// })
+
+// const isName = computed(() => {
+//     try {
+//         return store.userData.data.first_name !== null
+//     }
+//     catch(err) {
+//         return false
+//     }
+// })
+
 // methods
 const closeNav = (e) => {
     if (!root.value.contains(e.target)) {
@@ -17,10 +36,12 @@ const closeNav = (e) => {
     }
 }
 
-// on mounted hook
+// hooks
 onMounted(() => {
     document.addEventListener("click", closeNav)
 })
+
+store.getMe()
 </script>
 
 <template>
@@ -30,8 +51,8 @@ onMounted(() => {
             @click.prevent="active = !active"
             :class="active ? 'ring-2':''"
             class="flex items-center justify-center h-10 w-10 overflow-hidden ring-white ring-offset-2 ring-offset-slate-900 bg-slate-800 rounded-full transition-all duration-150 hover:ring-2">
-            <img v-if="store.userData.data" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
-            <p v-else class="font-black text-2xl text-white">S</p>
+            <img v-if="store.userData.data.mugshot" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
+            <p v-else class="font-black text-2xl text-white">{{store.userData.data.first_name[0]}}</p>
         </button>
 
         <transition

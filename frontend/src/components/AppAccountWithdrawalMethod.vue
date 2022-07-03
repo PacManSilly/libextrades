@@ -124,7 +124,7 @@ const withdrawNow = () => {
                             <form @submit.prevent="withdrawNow" class="w-full flex flex-col gap-5 md:w-2/3">
                                 <AppInputField v-for="field in activeTab.fields" :key="field.id" :label="field.name" v-model="field.model.value" />
                                 <AppInputField label="Amount in USD" v-model="amount" />
-                                <AppButton name="Withdraw" />                             
+                                <AppButton name="Withdraw" :loading="store.newWithdrawal.loading" />                             
                             </form>
 
                         </div>

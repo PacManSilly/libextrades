@@ -26,7 +26,6 @@ export const useUserWithdrawal = defineStore({
                 this.withdrawals.loading = false
                 if (err.response.status == 401) userStore.signOut()
                 else this.withdrawals.error = "An error occured"
-                console.log(err)
               })
         },
         async createWithdrawal(data) {
@@ -37,7 +36,6 @@ export const useUserWithdrawal = defineStore({
                 .then((resp) => {
                     this.newWithdrawal.loading = false
                     this.newWithdrawal.error = null
-                    console.log(resp.data)
                     
                     // redirect to deposite history
                     this.$router.push({name: 'withrawalhistory'})
@@ -46,7 +44,6 @@ export const useUserWithdrawal = defineStore({
                     this.newWithdrawal.loading = false
                     if (err.response.status == 401) userStore.signOut()
                     else this.newWithdrawal.error = "error"
-                    console.log(err.response)
                 })
         },
     }

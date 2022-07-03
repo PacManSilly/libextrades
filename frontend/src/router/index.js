@@ -68,7 +68,20 @@ const router = createRouter({
         {
           path: '/account/copyexpert',
           name: 'copyexpert',
-          component: () => import("../components/AppAccountCopyExpert.vue")
+          redirect: {name: 'mytraders'},
+          component: () => import("../components/AppAccountCopyExpert.vue"),
+          children: [
+            {
+              path: '',
+              name: 'mytraders',
+              component: () => import("../components/AppAccountMyTraders.vue"),
+            },
+            {
+              path: '/account/copyexpert/traders',
+              name: 'experttraders',
+              component: () => import("../components/AppAccountExpertTraders.vue"),
+            }
+          ]
         },
         {
           path: '/account/referral',

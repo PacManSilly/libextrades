@@ -8,9 +8,12 @@ import AppAccountSettingEmail from './AppAccountSettingEmail.vue';
 import AppAccountSettingPassword from './AppAccountSettingPassword.vue';
 import AppAccountSettingAddress from './AppAccountSettingAddress.vue';
 import AppAccountSettingIdentity from './AppAccountSettingIdentity.vue';
+import { useUserStore } from '../stores/user';
+
+// stores
+const store = useUserStore()
 
 // data
-const modal = ref(false)
 const tabId = ref()
 const tabs = [
     {id: 1, name: 'Profile'},
@@ -27,8 +30,8 @@ const activeTab = computed(() => {
 
 // methods
 const edit = (id) => {
+    store.profileUpdate.modal = true
     tabId.value = id
-    modal.value = true
 }
 </script>
 
@@ -42,7 +45,7 @@ const edit = (id) => {
                 <span class="text-slate-600 font-normal tracking-wide">Update your account settings</span>
             </div>
 
-            <div class="w-full flex flex-col gap-10 mt-10 items-start justify-between pb-10 md:gap-20 md:justify-center lg:flex-row">
+            <div class="w-full flex flex-col gap-10 mt-10 items-center justify-between pb-10 md:gap-20 md:justify-center md:flex-row">
 
                 <div class="w-full md:w-1/2 lg:w-3/12">
                     <div class="w-full bg-slate-800 p-4 flex flex-col items-start gap-2 rounded-md">
@@ -51,7 +54,7 @@ const edit = (id) => {
                 </div>
 
                 <div class="w-full h-full flex items-center justify-start">
-                    <div class="w-full h-60 p-4 flex flex-col items-center justify-center border-2 border-dashed border-slate-700 rounded-lg bg-slate-800 md:h-72 md:w-7/12 lg:p-0 lg:w-1/2">
+                    <div class="w-full h-60 p-4 flex flex-col items-center justify-center border-2 border-dashed border-slate-700 rounded-lg bg-slate-800 md:h-72 lg:p-0 lg:w-1/2">
                         <IconSetting class="w-20 h-20 fill-slate-700" />
                         <p class="text-center text-slate-700 font-medium text-sm md:text-base">Select the data you would like to update</p>
                     </div>
@@ -69,12 +72,12 @@ const edit = (id) => {
                 enter-active-class="transition-all duration-150"
                 leave-to-class="scale-0 opacity-0"
                 leave-active-class="transition-all duration-150">
-                <div v-if="modal" class="w-full absolute top-0 z-30 h-screen min-h-[40rem] bg-slate-900/90 backdrop-blur-lg">
+                <div v-if="store.profileUpdate.modal" class="w-full absolute top-0 z-30 h-screen min-h-[40rem] bg-slate-900/90 backdrop-blur-lg">
 
                     <div class="w-full h-full relative flex items-center justify-center">
                         
                         <!-- close button -->
-                        <button @click.prevent="modal = false" type="button" class="absolute group top-5 left-5 p-2 rounded transition-all duration-150 hover:bg-slate-800">
+                        <button @click.prevent="store.profileUpdate.modal = false" type="button" class="absolute group top-5 left-5 p-2 rounded transition-all duration-150 hover:bg-slate-800">
                             <IconCloseBig class="w-10 h-10 fill-slate-400 group-hover:fill-slate-200" />
                         </button>
 

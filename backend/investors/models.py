@@ -1,3 +1,4 @@
+from email.policy import default
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.core import validators
@@ -32,12 +33,20 @@ STATUS = (
 )
 
 
-def save_image(instance, filename):
+def save_image_investors(instance, filename):
     """
     Function to return the file path to save the mugshot of
     an investor.
     """
     return F"mediafiles/investors/{instance.id}/images/{filename}"
+
+
+def save_image_experts(instance, filename):
+    """
+    Function to return the file path to save the mugshot of
+    an investor.
+    """
+    return F"mediafiles/experttraders/{instance.id}/images/{filename}"
 
 
 class UserManager(BaseUserManager):
@@ -92,15 +101,15 @@ class User(AbstractUser):
         _("Is Verified"), default=False, blank=False, null=False,
         help_text=_("Investor email address is verified")
     )
-    kyc_front_view = models.ImageField(_("KYC Front View"), upload_to=save_image, blank=True, null=True, help_text=_("KYC front view"))
-    kyc_back_view = models.ImageField(_("KYC Back View"), upload_to=save_image, blank=True, null=True, help_text=_("KYC back view"))
+    kyc_front_view = models.ImageField(_("KYC Front View"), upload_to=save_image_investors, blank=True, null=True, help_text=_("KYC front view"))
+    kyc_back_view = models.ImageField(_("KYC Back View"), upload_to=save_image_investors, blank=True, null=True, help_text=_("KYC back view"))
 
     # bio
     first_name = models.CharField(_("First Name"), max_length=255, blank=True, null=True)
     last_name = models.CharField(_("Last Name"), max_length=255, blank=True, null=True)
     other_name = models.CharField(_("Other Name"), max_length=255, blank=True, null=True)
     gender = models.CharField(_("Gender"), max_length=7, choices=GENDER, blank=True, null=True)
-    mugshot = models.ImageField(_("Mugshot"), upload_to=save_image, blank=True, null=True)
+    mugshot = models.ImageField(_("Mugshot"), upload_to=save_image_investors, blank=True)
     dob = models.DateField(_("Date of Birth"), auto_now=False, auto_now_add=False, blank=True, null=True)
 
     # Address
@@ -108,6 +117,12 @@ class User(AbstractUser):
     state = models.CharField(_("State"), max_length=255, blank=True, null=True)
     city = models.CharField(_("City"), max_length=255, blank=True, null=True)
     postal = models.CharField(_("Postal/ZIP"), max_length=20, blank=True, null=True)
+
+    # investment
+    total_investment = models.CharField(_("Total Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total investment"))
+    current_investment = models.CharField(_("Current Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors currrent investment"))
+    total_earnings = models.CharField(_("Total Earnings"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total earnings"))
+    total_balance = models.CharField(_("Total Balance"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total balance"))
 
     objects = UserManager()
 
@@ -157,3 +172,19 @@ class InvestorWithdrawal(models.Model):
 
     def __str__(self):
         return F"{self.investor} - ({self.method}) - (${self.amount})"
+
+
+class ExpertTraders(models.Model):
+    id = models.CharField(_("ID"), default=uuid.uuid4, max_length=255, unique=True, primary_key=True, editable=False)
+    email = models.EmailField(_("Email Address"), max_length=254, blank=True, null=True)
+    investors = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_("Investors"), blank=True, help_text=_("Investors linked with this trader"))
+    mugshot = models.ImageField(_("Mugshot"), upload_to=save_image_experts, blank=True, null=True)
+    full_name = models.CharField(_("Full Name"), max_length=255, blank=False, null=False, help_text=_("Trader full name"))
+    win_rate = models.CharField(_("Win Rate"), max_length=50, blank=True, null=True, default="90%")
+    profit_share = models.CharField(_("Profit Share"), max_length=50, blank=True, null=True, default="20%")
+
+    class Meta:
+        verbose_name_plural = 'ExpertTraders'
+
+    def __str__(self):
+        return self.full_name

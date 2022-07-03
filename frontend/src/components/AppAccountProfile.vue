@@ -2,10 +2,19 @@
 /* eslint-disable */
 import { useUserStore } from "../stores/user";
 import IconSetting from "./icons/IconSetting.vue";
-import { storeToRefs } from "pinia";
+import { computed } from "vue";
 
 // stores
 const store = useUserStore()
+
+// computed
+const fullName = computed(() => {
+    const fname = store.userData.data.first_name
+    const lname = store.userData.data.last_name
+    const oname = store.userData.data.other_name
+
+    return fname + " " + lname + " " + oname
+})
 
 // created hooks
 store.getMe()
@@ -38,7 +47,7 @@ store.getMe()
                         <img v-if="store.userData.data.mugshot" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
                         <p v-else class="text-6xl font-black text-white">S</p>
                     </div>
-                    <p class="text-white text-xl font-medium">Samuel L. Jackson</p>
+                    <p class="text-white text-xl font-medium">{{fullName}}</p>
                 </div>
 
                 <div class="flex flex-col gap-2 w-full md:w-9/12 lg:w-6/12 xl:w-5/12">

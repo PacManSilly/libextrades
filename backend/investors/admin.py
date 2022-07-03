@@ -1,5 +1,5 @@
+from .models import User, InvestorInvestment, InvestorWithdrawal, ExpertTraders
 from .forms import CustomAppUserCreationForm, CustomAppUserChangeForm
-from .models import User, InvestorInvestment, InvestorWithdrawal
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.sites.models import Site
@@ -28,6 +28,7 @@ class UserModelAdmin(UserAdmin):
         ("Identification", {"fields": ("id", "email", "phone", "password", "kyc_front_view", "kyc_back_view"), }),
         ("Bio", {"fields": ("first_name", "last_name", "other_name", "dob", "gender", "mugshot"), }),
         ("Location", {"fields": ("country", "state", "city", "postal", )}),
+        ("Investment", {"fields": ("total_investment", "current_investment", "total_earnings", "total_balance")}),
         ("Status", {"fields": ("is_verified", "is_active", "is_staff", "is_superuser"), }),
         ("Groups & Permissions", {"fields": ("groups", "user_permissions"), }),
         ("Important Dates", {"fields": ("date_joined", "last_login"), }),
@@ -52,6 +53,13 @@ class InvestorWithdrawalAdmin(admin.ModelAdmin):
     list_filter = ('method',)
 
 
+class ExpertTradersAdmin(admin.ModelAdmin):
+    model = ExpertTraders
+    list_display = ('id', 'full_name', 'win_rate', 'profit_share')
+    list_display_links = ('id', 'full_name')
+
+
+
 admin_site = MyAdmin(name='admin')
 admin_site.register(Site)
 admin_site.register(Group)
@@ -59,3 +67,4 @@ admin_site.register(Token)
 admin_site.register(User, UserModelAdmin)
 admin_site.register(InvestorInvestment, InvestorInvestmentAdmin)
 admin_site.register(InvestorWithdrawal, InvestorWithdrawalAdmin)
+admin_site.register(ExpertTraders, ExpertTradersAdmin)

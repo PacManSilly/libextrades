@@ -1,5 +1,6 @@
+from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders
 from rest_framework import status, views, viewsets, permissions
-from .models import InvestorInvestment, InvestorWithdrawal
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -17,6 +18,7 @@ class UserApiViewset(viewsets.GenericViewSet):
     lookup_field = 'email'
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+    parser_classes = [MultiPartParser, FormParser]
 
     def get_permissions(self, *args, **kwargs):
         if self.action == 'create':
@@ -207,3 +209,43 @@ class InvestorWithdrawalApiViewset(viewsets.GenericViewSet):
         investment.delete()
         data = {'id': id , 'plan': plan, 'amount': amount, 'detail': 'Deleted successfully'}
         return Response(data=data, status=status.HTTP_204_NO_CONTENT)
+
+
+class ExpertTraderApiViewSet(viewsets.GenericViewSet):
+    lookup_field = 'id'
+    queryset = ExpertTraders.objects.all()
+    serializer_class = serializers.ExpertTraderSerializer
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, context={'request': request})
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def list(self, request, *args, **kwargs):
+        serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, id=None, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object(), context={'request': request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    
+    def update(self, request, id=None, *args, **kwargs):
+        serializer = self.get_serializer(instance=self.get_object(), data=request.data, context={'request': request}, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # def destroy(self, request, id=None, *args, **kwargs):
+    #     expert = self.get_object()
+    #     id, name, email = (expert.id, expert.name, expert.email)
+    #     expert.delete()
+    #     data = {'id': id , 'full_name': name, 'email': email, 'detail': 'Deleted successfully'}
+    #     return Response(data=data, status=status.HTTP_204_NO_CONTENT)
+

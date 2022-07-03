@@ -39,7 +39,7 @@ const showPassword = ref(false)
                 :minlength="minlength"
                 :placeholder="placeholder"
                 class="w-full p-2 bg-slate-100 text-xs text-slate-700 rounded-sm ring-blue-500 ring-offset-2
-                ring-offset-slate-900 transition-all duration-150 group-hover:ring-2 group-focus:ring-2
+                ring-offset-slate-900 transition-all duration-150 group-hover:ring-2 focus:ring-2
                 focus:outline-none md:p-2 md:text-sm"
             />
 

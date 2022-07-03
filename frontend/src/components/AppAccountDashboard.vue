@@ -2,11 +2,22 @@
 /* eslint-disable */
 import { useUserStore } from '../stores/user';
 import VueTradingView from 'vue-trading-view/src/';
+import { computed } from 'vue';
 
 // stores
 const store = useUserStore()
 
-// created
+// computed
+const isName = computed(() => {
+    try {
+        return store.userData.data.first_name !== null
+    }
+    catch(err) {
+        return false
+    }
+})
+
+// hooks
 store.getMe()
 </script>
 
@@ -17,25 +28,25 @@ store.getMe()
 
             <div class="flex flex-col gap-2 mt-10 mb-10 lg:mt-0">
                 <h1 class="text-white text-4xl font-black">Dashboard</h1>
-                <span class="text-slate-600 font-normal tracking-wide">Welcome, Samuel</span>
+                <span class="text-slate-600 font-normal tracking-wide">Welcome, {{isName ? store.userData.data.first_name:''}}</span>
             </div>
 
             <div class="grid grid-cols-2 gap-5 justify-between items-start lg:grid-cols-4">
                 <!-- total investment -->
                 <div class="flex items-start justify-start p-4 w-full h-28 rounded-lg shadow bg-slate-700 md:h-32">
                     <div class="flex flex-col">
-                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Total Investment</span>
-                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">$14,999</p>
+                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Total Investments</span>
+                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">${{store.userData.data.total_investment}}</p>
                     </div>
                 </div>
 
                 <!-- latest investment -->
                 <div class="flex items-start justify-start p-4 w-full h-28 rounded-lg shadow bg-slate-700 md:h-32">
                     <div class="flex flex-col">
-                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Latest Investment</span>
-                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">$99,998</p>
+                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Current Investment</span>
+                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">${{store.userData.data.current_investment}}</p>
                         <span class="text-xs font-medium mt-4">
-                            <span class="text-green-500">5%</span>
+                            <span class="text-green-500">%</span>
                             <span class="text-slate-400">/daily</span>
                         </span>
                     </div>
@@ -45,7 +56,7 @@ store.getMe()
                 <div class="flex items-start justify-start p-4 w-full h-28 rounded-lg shadow bg-slate-700 md:h-32">
                     <div class="flex flex-col">
                         <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Total Earnings</span>
-                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">$4,900</p>
+                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">${{store.userData.data.total_earnings}}</p>
                     </div>
                 </div>
 
@@ -54,7 +65,7 @@ store.getMe()
                 <div class="flex items-start justify-start p-4 w-full h-28 rounded-lg shadow bg-slate-700 md:h-32">
                     <div class="flex flex-col">
                         <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Total Balance</span>
-                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">$99,998</p>
+                        <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">${{store.userData.data.total_balance}}</p>
                         <span class="text-xs font-medium mt-4">
                             <span class="text-green-500">Withdrawable</span>
                         </span>

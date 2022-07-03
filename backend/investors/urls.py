@@ -35,6 +35,12 @@ urlpatterns = [
     path('withdrawals/<int:id>/update/', apis.InvestorWithdrawalApiViewset.as_view({'put': 'update', 'patch': 'update'}), name='withdrawals_update'),
     path('withdrawals/<int:id>/delete/', apis.InvestorWithdrawalApiViewset.as_view({'delete': 'destroy'}), name='withdrawals_delete'),
 
+    # expert traders endpoint
+    path('experts/', apis.ExpertTraderApiViewSet.as_view({'get': 'list'}), name="experts_list"),
+    path('experts/new/', apis.ExpertTraderApiViewSet.as_view({'post': 'create'}), name="experts_create"),
+    path('experts/<uuid:id>/', apis.ExpertTraderApiViewSet.as_view({'get': 'retrieve'}), name="experts_detail"),
+    path('experts/<uuid:id>/update/', apis.ExpertTraderApiViewSet.as_view({'put': 'update', 'patch': 'update'}), name="experts_update"),
+
     # Email verification endpoint
     path('verify-email/', apis.VerifyEmail.as_view(), name='verify_email'),
     path("resend-email/", apis.ResendVerifyEmail.as_view({'post': 'post'}), name="resend_verification_email"),
