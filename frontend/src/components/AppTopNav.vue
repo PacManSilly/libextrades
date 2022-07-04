@@ -39,24 +39,24 @@ onMounted(() => {
 
                 <div class="flex gap-x-10">
                     
-                    <RouterLink :to="{name: 'home'}" class="text-base text-slate-400 font-normal hover:text-white">Steps</RouterLink>
-                    <RouterLink :to="{name: 'home'}" class="text-base text-slate-400 font-normal hover:text-white">Plans</RouterLink>
+                    <RouterLink to="/#steps" class="text-base text-slate-400 font-normal hover:text-white">Steps</RouterLink>
+                    <RouterLink to="/#plans" class="text-base text-slate-400 font-normal hover:text-white">Plans</RouterLink>
 
                     <div class="relative">
                         <button type="button" @click.prevent="tradesMenu = !tradesMenu" :to="{name: 'home'}" :class="tradesMenu ? 'text-white':'text-slate-400'" class="text-base font-normal hover:text-white">Trades</button>
 
                         <div :class="tradesMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="absolute top-10 -left-5 flex flex-col shadow-lg bg-slate-800 rounded-lg w-40 transition-all duration-150">
-                            <RouterLink :to="{name: 'home'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Forex</RouterLink>
-                            <RouterLink :to="{name: 'home'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Stocks</RouterLink>
-                            <RouterLink :to="{name: 'home'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Ctyptos</RouterLink>
-                            <RouterLink :to="{name: 'home'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Options</RouterLink>
-                            <RouterLink :to="{name: 'home'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Copy Traders</RouterLink>
+                            <RouterLink :to="{name: 'tradeforex'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Forex</RouterLink>
+                            <RouterLink :to="{name: 'tradestock'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Stocks</RouterLink>
+                            <RouterLink :to="{name: 'tradecrypto'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Cryptos</RouterLink>
+                            <RouterLink :to="{name: 'tradeoption'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Options</RouterLink>
+                            <RouterLink :to="{name: 'tradecopytrader'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Copy Traders</RouterLink>
                         </div>
                     </div>
 
-                    <RouterLink :to="{name: 'home'}" class="text-base text-slate-400 font-normal hover:text-white">Testimonials</RouterLink>
-                    <RouterLink :to="{name: 'home'}" class="text-base text-slate-400 font-normal hover:text-white">FAQs</RouterLink>
-                    <RouterLink :to="{name: 'home'}" class="text-base text-slate-400 font-normal hover:text-white">Contact Us</RouterLink>
+                    <RouterLink to="/#testimonials" class="text-base text-slate-400 font-normal hover:text-white">Testimonials</RouterLink>
+                    <RouterLink to="/#faqs" class="text-base text-slate-400 font-normal hover:text-white">FAQs</RouterLink>
+                    <RouterLink to="/#contactus" class="text-base text-slate-400 font-normal hover:text-white">Contact Us</RouterLink>
 
                 </div>
 
@@ -82,16 +82,16 @@ onMounted(() => {
                 <div class="w-10/12 flex flex-col gap-y-10 mx-auto">
 
                     <div class="grid grid-cols-2 gap-3 text-left">
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Steps</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Plans</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Forex</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Stocks</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Ctyptos</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Options</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Copy Traders</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Testimonials</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">FAQs</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'home'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Contact Us</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" to="/#steps" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Steps</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" to="/#plans" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Plans</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradeforex'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Forex</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradestock'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Stocks</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradecrypto'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Ctyptos</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradeoption'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Options</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradecopytrader'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Copy Traders</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" to="/#testimonials" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Testimonials</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" to="/#faqs" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">FAQs</RouterLink>
+                        <RouterLink @click.prevent="mobileMenu = false" to="/#contactus" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Contact Us</RouterLink>
                     </div>
 
                     <div class="flex items-center justify-center gap-3 border-t border-slate-500 pt-5">

@@ -1,7 +1,17 @@
 <script setup>
 /* eslint-disable */
 import IconCheckAll from './icons/IconCheckAll.vue';
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { onMounted, ref } from 'vue';
+gsap.registerPlugin(ScrollTrigger);
 
+// refs
+const whyus = ref("")
+const whyusHead = ref("")
+const whyusCards = ref("")
+
+// data
 const cards = [
     {
         id: 1,
@@ -34,14 +44,27 @@ const cards = [
         detail: "The aim of our system is to give investors financial breakthrough. This is achieved through our carefully crafted system of trading."
     },
 ]
+
+
+// methods
+const animExperience = () => {
+   gsap.from(whyusHead.value, {scrollTrigger: {trigger: whyus.value, start: "200px bottom", markers: false, id: "whyus"}, duration: 1, y: 100, opacity: 0,})
+   gsap.from(whyusCards.value, {scrollTrigger: {trigger: whyus.value, start: "400px bottom", markers: false, id: "whyus"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
+}
+
+
+// hooks
+onMounted(() => {
+    animExperience()
+})
 </script>
 
 <template>
-    <div class="w-full h-full min-h-full py-20 bg-slate-800">
+    <div ref="whyus" class="w-full h-full min-h-full py-20 bg-slate-800">
 
         <div class="w-11/12 mx-auto flex flex-col gap-y-20 lg:w-10/12">
 
-            <div class="flex flex-col items-center gap-2">
+            <div ref="whyusHead" class="flex flex-col items-center gap-2">
                 <h2 class="text-white text-xl font-black md:text-3xl">Why Choose Us?</h2>
                 <p class="w-11/12 mx-auto text-center text-xs text-slate-500 md:text-sm lg:w-1/2">
                     LibExTrades investment is a trading platform. We trade and help you get to financial independence
@@ -50,7 +73,7 @@ const cards = [
 
             <div class="w-full h-full grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 lg:flex-row">
 
-                <div v-for="card in cards" :key="card.id" class="flex flex-col gap-3 items-center justify-center bg-slate-900 px-4 py-10 rounded-md shadow-lg shadow-slate-800">
+                <div ref="whyusCards" v-for="card in cards" :key="card.id" class="flex flex-col gap-3 items-center justify-center bg-slate-900 px-4 py-10 rounded-md shadow-lg shadow-slate-800">
                     <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-inner shadow-black">
                         <IconCheckAll class="w-7 h-7 fill-slate-900" />
                     </div>

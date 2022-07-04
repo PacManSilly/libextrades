@@ -1,6 +1,9 @@
 <script setup>
 /* eslint-disable */
 import tradeimg from '../assets/images/tradeimg.jpg'
+import AppTopNav from './AppTopNav.vue';
+import AppHomeContactUs from './AppHomeContactUs.vue';
+import AppHomeFooter from './AppHomeFooter.vue';
 
 // data
 const data = {
@@ -11,7 +14,11 @@ const data = {
 </script>
 
 <template>
-    <div class="w-full h-full min-h-full">
+    <div class="relative w-full h-full min-h-full">
+
+        <nav class="fixed top-0 right-0 w-full bg-slate-900/20 backdrop-blur">
+            <AppTopNav />
+        </nav>
 
         <div class="w-full h-full flex flex-col gap-16 pb-10">
 
@@ -67,6 +74,9 @@ const data = {
             </div>
 
         </div>
+
+        <AppHomeContactUs />
+        <AppHomeFooter />
 
     </div>
 </template>

@@ -6,6 +6,16 @@ import man3 from '../assets/images/man3.jpg'
 import woman1 from '../assets/images/woman1.jpeg'
 import woman2 from '../assets/images/woman2.jpeg'
 import woman3 from '../assets/images/woman3.jpeg'
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { onMounted, ref } from 'vue';
+gsap.registerPlugin(ScrollTrigger);
+
+// refs
+const testimonial = ref("")
+const testHead = ref("")
+const testCard = ref("")
+const testUsers = ref("")
 
 const payouts = [
     {id: 1, name: "Novella Kujb", amount: "$15,587.00"},
@@ -73,14 +83,26 @@ const testimonials = [
     },
 ]
 
+
+// methods
+const animTestimonials = () => {
+   gsap.from(testHead.value, {scrollTrigger: {trigger: testimonial.value, start: "200px bottom", markers: false, id: "testimonial"}, duration: 1, y: -100, opacity: 0,})
+   gsap.from(testCard.value, {scrollTrigger: {trigger: testimonial.value, start: "500px bottom", markers: false, id: "testimonial"}, duration: 1, y: -100, opacity: 0,})
+   gsap.from(testUsers.value, {scrollTrigger: {trigger: testimonial.value, start: "500px bottom", markers: false, id: "testimonial"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
+}
+
+// hooks
+onMounted(() => {
+    animTestimonials()
+})
 </script>
 
 <template>
-    <div class="w-full h-full min-h-full py-20">
+    <div id="testimonials" ref="testimonial" class="w-full h-full min-h-full py-20">
 
         <div class="w-11/12 mx-auto flex flex-col gap-y-20 lg:w-10/12">
 
-            <div class="flex flex-col items-center gap-2">
+            <div ref="testHead" class="flex flex-col items-center gap-2">
                 <h2 class="text-white text-xl font-black md:text-3xl">Testimonials</h2>
                 <p class="w-11/12 mx-auto text-center text-xs text-slate-500 md:text-sm lg:w-1/2">
                     See what our clients are saying
@@ -89,7 +111,7 @@ const testimonials = [
 
             <div class="w-full h-full flex flex-col items-center justify-center gap-y-10 lg:gap-5 lg:flex-row">
 
-                <div class="order-2 w-full flex flex-col gap-10 bg-slate-800 rounded-md shadow-md shadow-slate-800 py-6 px-4 md:w-5/12 lg:order-1 lg:w-3/12">
+                <div ref="testCard" class="order-2 w-full flex flex-col gap-10 bg-slate-800 rounded-md shadow-md shadow-slate-800 py-6 px-4 md:w-5/12 lg:order-1 lg:w-3/12">
                     <h3 class="text-slate-200 text-base text-center font-bold">Latest Payouts</h3>
 
                     <div class="w-full h-full flex flex-col gap-y-2">
@@ -102,7 +124,7 @@ const testimonials = [
 
                 <div class="order-1 w-full h-full grid grid-cols-2 gap-10 justify-between lg:order-2">
                     
-                    <div v-for="user in testimonials" :key="user.id" class="flex flex-col items-center gap-2">
+                    <div ref="testUsers" v-for="user in testimonials" :key="user.id" class="flex flex-col items-center gap-2">
                         <div class="w-20 h-20 rounded-full overflow-hidden  md:w-32 md:h-32">
                             <img :src="user.image" class="w-full h-full object-cover object-center">
                         </div>

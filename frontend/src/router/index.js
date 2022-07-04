@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, useRouter } from "vue-router";
 import { useUserStore } from '../stores/user';
 import HomeView from "../views/HomeView.vue";
 import AccountView from "../views/AccountView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -169,7 +170,16 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/SignUpView.vue"),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notfound',
+      component: NotFoundView
+    },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) return {el: to.hash,  behavior: "smooth"}
+    else return { top: 0, behavior: "smooth" }
+  }
 });
 
 router.beforeEach((to, from) => {
@@ -180,5 +190,6 @@ router.beforeEach((to, from) => {
     return {name: 'signin', query: {redirect: to.fullPath}}
   }
 })
+
 
 export default router;
