@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router';
 
         <RouterLink
             :to="{name: 'home'}"
-            class="text-lg text-white font-black tracking-wider md:text-2xl"
+            class="text-2xl text-white font-black tracking-wider md:text-4xl"
         >
             LibExTrades
         </RouterLink>

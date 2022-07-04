@@ -1,7 +1,9 @@
 <script setup>
 /* eslint-disable */
-import AppCopyText from './AppCopyText.vue';
+import { useUserStore } from '../stores/user';
 
+// stores
+const store = useUserStore()
 </script>
 
 <template>
@@ -35,7 +37,7 @@ import AppCopyText from './AppCopyText.vue';
                         <div>
                             <div class="flex flex-col items-center gap-3">
                                 <span class="text-sm font-medium text-slate-600">Referral Link</span>
-                                <span class="text-xs font-medium text-slate-100">https://libextrades.com/signup?refid=yquHLDJCDHUJkjb</span>
+                                <span class="text-xs font-medium text-slate-100">https://libextrades.com/signup?refid={{store.userData.data.id}}</span>
                             </div>
                         </div>
                     
