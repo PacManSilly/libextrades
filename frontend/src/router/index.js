@@ -13,6 +13,39 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/trade",
+      name: "trade",
+      redirect: {name: 'tradeforex'},
+      component: () => import("../views/TradeExplain.vue"),
+      children: [
+        {
+          path: '/trade/forex',
+          name: 'tradeforex',
+          component: () => import("../components/AppTradeForex.vue"),
+        },
+        {
+          path: '/trade/stock',
+          name: 'tradestock',
+          component: () => import("../components/AppTradeStock.vue"),
+        },
+        {
+          path: '/trade/crypto',
+          name: 'tradecrypto',
+          component: () => import("../components/AppTradeCrypto.vue"),
+        },
+        {
+          path: '/trade/option',
+          name: 'tradeoption',
+          component: () => import("../components/AppTradeOption.vue"),
+        },
+        {
+          path: '/trade/copytrader',
+          name: 'tradecopytrader',
+          component: () => import("../components/AppTradeCopyTrader.vue"),
+        },
+      ]
+    },
+    {
       path: "/account",
       name: "account",
       redirect: {name: 'dashboard'},
