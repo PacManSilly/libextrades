@@ -16,14 +16,14 @@ const data = {
 <template>
     <div class="relative w-full h-full min-h-full">
 
-        <nav class="fixed top-0 right-0 w-full bg-slate-900/20 backdrop-blur">
+        <nav class="fixed top-0 right-0 w-full">
             <AppTopNav />
         </nav>
 
         <div class="w-full h-full flex flex-col gap-16 pb-10">
 
             <div class="w-full h-60 bg-cover bg-center flex flex-col items-center justify-center gap-2 md:h-96" :style="data.inlineStyle">
-                <h1 class="text-2xl text-white font-black md:text-6xl">Trade Forex</h1>
+                <h1 class="text-2xl text-white font-black mt-16 md:text-6xl">Trade Forex</h1>
                 <p class="w-9/12 text-center text-xs text-normal text-slate-200 md:text-base">Trade forex on the LibExTrades platform and enjoy reliable pricing and exceptional execution</p>
             </div>
 

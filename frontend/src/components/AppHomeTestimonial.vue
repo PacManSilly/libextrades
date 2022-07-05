@@ -86,8 +86,8 @@ const testimonials = [
 
 // methods
 const animTestimonials = () => {
-   gsap.from(testHead.value, {scrollTrigger: {trigger: testimonial.value, start: "200px bottom", markers: false, id: "testimonial"}, duration: 1, y: -100, opacity: 0,})
-   gsap.from(testCard.value, {scrollTrigger: {trigger: testimonial.value, start: "500px bottom", markers: false, id: "testimonial"}, duration: 1, y: -100, opacity: 0,})
+   gsap.from(testHead.value, {scrollTrigger: {trigger: testimonial.value, start: "200px bottom", markers: false, id: "testimonial"}, duration: 1, y: 100, opacity: 0,})
+   gsap.from(testCard.value, {scrollTrigger: {trigger: testimonial.value, start: "700px bottom", markers: false, id: "testimonial"}, duration: 1, y: -100, opacity: 0,})
    gsap.from(testUsers.value, {scrollTrigger: {trigger: testimonial.value, start: "500px bottom", markers: false, id: "testimonial"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
 }
 

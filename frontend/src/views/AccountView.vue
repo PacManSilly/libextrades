@@ -49,7 +49,7 @@ onMounted(() => {
             <!-- start of account main -->
             <div
                 @click="menu = false"
-                class="fixed right-0 w-full h-full overflow-y-auto py-20 px-10 lg:w-10/12">
+                class="fixed right-0 w-full h-full overflow-y-auto py-20 px-5 lg:px-10 lg:w-10/12">
                 <RouterView />
             </div>
             <!-- start of account main -->

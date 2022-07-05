@@ -17,18 +17,7 @@ const steps3 = ref("")
 
 // methods
 const animSteps = () => {
-    gsap.from([stepsHead.value, steps1.value, steps2.value, steps3.value], {
-        scrollTrigger: {
-            trigger: steps.value,
-            start: "200px bottom",
-            markers: false,
-            id: "trade-crypto"
-        },
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        stagger: 0.2
-    })
+    gsap.from([stepsHead.value, steps1.value, steps2.value, steps3.value], {scrollTrigger: {trigger: steps.value, start: "200px bottom", markers: false, id: "trade-crypto"}, duration: 1, y: 50, opacity: 0, stagger: 0.2})
 }
 
 // hooks

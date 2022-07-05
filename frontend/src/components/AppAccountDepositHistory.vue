@@ -9,6 +9,7 @@ import AppCopyText from './AppCopyText.vue';
 import IconCreditCard from './icons/IconCreditCard.vue';
 import IconCloseBig from './icons/IconCloseBig.vue';
 import IconLongRight from './icons/IconLongRight.vue';
+import IconSetting from './icons/IconSetting.vue';
 import AppInvestmentCard from './AppInvestmentCard.vue';
 
 // store
@@ -83,7 +84,7 @@ store.getInvestments()
                         </div>
                     </div>
 
-                    <div class="mt-5 flex flex-col gap-2">
+                    <div class="mt-5 flex flex-col gap-4 md:gap-2">
                         <AppInvestmentCard @pay-now="deposit(investment.id)" v-for="investment in store.investments.data" :key="investment.id" v-bind="investment" />
                     </div>
 

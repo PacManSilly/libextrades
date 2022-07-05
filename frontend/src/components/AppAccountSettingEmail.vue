@@ -31,7 +31,7 @@ const updateEmail = () => {
 
             <div class="text-center mb-10 flex flex-col gap-2">
                 <h1 class="text-white font-black text-2xl md:text-4xl">Update Your Email Address</h1>
-                <span class="text-slate-400 font-bold text-xs md:text-sm">Changing your email address will automatically log you out.</span>
+                <span class="text-yellow-400 font-bold text-xs md:text-sm">Changing your email address will need re-authentication.</span>
             </div>
 
             <!-- start of handle errors  -->

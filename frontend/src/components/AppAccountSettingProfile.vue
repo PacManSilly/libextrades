@@ -52,8 +52,11 @@ const updateProfile = () => {
                 </ul>
             </transition>
 
-            <div class="flex gap-2">
-                <img :src="btclogo" class="h-20 w-20 rounded-full overflow-hidden">
+            <div class="flex flex-col gap-2 md:flex-row">
+                <div class="flex items-center justify-center h-16 w-16 overflow-hidden bg-slate-100 rounded-full">
+                    <img v-if="store.userData.data.mugshot" :src="store.userData.data.mugshot" class="h-full w-full object-cover object-center">
+                    <p v-else class="font-black text-2xl text-slate-900">{{store.userData.data.first_name[0]}}</p>
+                </div>
                 <input type="file" ref="mugshot" name="mugshot" id="mugshot" class="self-end text-blue-600 transition-all duration-150 file:cursor-pointer file:mr-4 file:py-2 file:px-2 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-blue-600 hover:file:bg-slate-100">
             </div>
 

@@ -1,8 +1,17 @@
 <script setup>
 /* eslint-disable */
-import { ref, reactive } from 'vue';
 import IconPlusCircle from './icons/IconPlusCircle.vue'
 import IconMinusCircle from './icons/IconMinusCircle.vue'
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { onMounted, ref, reactive } from 'vue';
+gsap.registerPlugin(ScrollTrigger);
+
+// resf
+const faqs = ref("")
+const faqsHead = ref("")
+const faqsCard = ref("")
+
 
 // data
 const faqId = ref(null)
@@ -26,14 +35,25 @@ const activateFaq = (id) => {
         else faq.state = false;
     });
 }
+
+// methods
+const animFaqs = () => {
+   gsap.from(faqsHead.value, {scrollTrigger: {trigger: faqs.value, start: "200px bottom", markers: false, id: "faqs"}, duration: 1, y: 100, opacity: 0})
+   gsap.from(faqsCard.value, {scrollTrigger: {trigger: faqs.value, start: "500px bottom", markers: false, id: "faqs"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
+}
+
+// hooks
+onMounted(() => {
+    animFaqs()
+})
 </script>
 
 <template>
-    <div id="faqs" class="w-full h-full min-h-full py-20 bg-white">
+    <div id="faqs" ref="faqs" class="w-full h-full min-h-full py-20 bg-white">
 
         <div class="w-11/12 mx-auto flex flex-col gap-y-10 lg:gap-y-20 lg:w-10/12">
 
-            <div class="flex flex-col items-center gap-2">
+            <div ref="faqsHead" class="flex flex-col items-center gap-2">
                 <h2 class="text-slate-900 text-xl font-black md:text-3xl">Frequently Asked Questions</h2>
                 <p class="w-11/12 mx-auto text-center text-xs text-slate-600 md:text-sm lg:w-1/2">
                     Can’t find the answers you are looking for? <RouterLink to="#contactus" class="text-blue-500">Contact us.</RouterLink>
@@ -44,7 +64,7 @@ const activateFaq = (id) => {
             <div class="w-full grid grid-cols-1 gap-2 py-4 mx-auto md:grid-cols-2 lg:w-9/12 lg:gap-10">
                 <transition-group name="smooth">
                 
-                    <span v-for="faq in obj.faqs" :key="faq.id" :class="faq.state ?'bg-slate-100':'bg-transparent'" class="group faqs flex flex-col space-y-3 p-4 rounded hover:bg-blueGray-100">
+                    <span ref="faqsCard" v-for="faq in obj.faqs" :key="faq.id" :class="faq.state ?'bg-slate-100':'bg-transparent'" class="group faqs flex flex-col space-y-3 p-4 rounded hover:bg-blueGray-100">
 
                         <!-- start of faq button -->
                         <button @click.prevent="activateFaq(faq.id)" class="flex items-center space-x-3">

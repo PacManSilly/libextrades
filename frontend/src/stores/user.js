@@ -12,6 +12,7 @@ export const useUserStore = defineStore({
         userData: {loading: true, data: JSON.parse(localStorage.getItem('libex_user')), error: null},
         userSignUp: {loading: false, data: null, success: false, error: null},
         userSignIn: {loading: false, token: JSON.parse(localStorage.getItem('libex_token')), success: false, redirect: null, error: null},
+        userSignOut: {modal: false, loading: false, error: null},
         profileUpdate: {modal: false, loading: false, success: null, error: null}
     }),
     actions: {
@@ -71,7 +72,7 @@ export const useUserStore = defineStore({
                     traderStore.getTraders()
 
                     // then redirect to initially requested page or home
-                    this.$router.push(this.userSignIn.redirect || {name: 'home'})
+                    this.$router.push(this.userSignIn.redirect || {name: 'dashboard'})
                     this.userSignIn.success = false
                 })
                 .catch((err) => {
@@ -84,7 +85,8 @@ export const useUserStore = defineStore({
         async signOut() {
             localStorage.removeItem('libex_token')
             localStorage.removeItem('libex_user')
-            this.$router.push({name: 'home'})
+            this.userSignOut.modal = false
+            this.$router.push({name: 'signin'})
         },
         async getMe() {
             this.userData.loading = true

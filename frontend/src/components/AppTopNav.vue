@@ -1,7 +1,8 @@
 <script setup>
 /* eslint-disable */
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useUserStore } from '../stores/user';
 import AppLogo from './AppLogo.vue';
 import IconHamburger from './icons/IconHamburger.vue';
 import IconCloseBig from './icons/IconCloseBig.vue';
@@ -9,7 +10,15 @@ import IconCloseBig from './icons/IconCloseBig.vue';
 // data
 const tradesMenu = ref(false)
 const mobileMenu = ref(false)
-const root = ref('')
+const root = ref(null)
+
+// stores
+const store = useUserStore()
+
+// computed
+const isAuth = computed(() => {
+    return localStorage.getItem('libex_user')
+})
 
 // methods
 const closeTradesMenu = (e) => {
@@ -22,10 +31,14 @@ const closeTradesMenu = (e) => {
 onMounted(() => {
     document.addEventListener("click", closeTradesMenu)
 })
+
+onUnmounted(() => {
+    document.removeEventListener("click", closeTradesMenu)
+})
 </script>
 
 <template>
-    <div ref="root" class="relative w-full h-auto py-10 bg-transparent">
+    <div ref="root" class="relative w-full h-auto py-5 bg-transparent lg:py-10">
 
         <div class="w-11/12 mx-auto flex justify-between items-center">
 
@@ -60,16 +73,23 @@ onMounted(() => {
 
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <RouterLink :to="{name: 'signin'}" class="px-4 py-1 text-base text-white bg-transparent border border-white rounded-md transition-all duration-150 hover:scale-105">Sign In</RouterLink>
-                    <RouterLink :to="{name: 'signup'}" class="px-4 py-1 text-base text-slate-900 bg-white border border-white rounded-md transition-all duration-150 hover:scale-105">Register</RouterLink>
+                <div>
+                    <div v-if="isAuth" class="flex items-center gap-3">
+                        <button type="button" @click.prevent="store.userSignOut.modal = true" class="px-4 py-1 text-base text-white bg-transparent border border-transparent rounded-md transition-all duration-150 hover:border-white hover:scale-105">Sign Out</button>
+                        <RouterLink :to="{name: 'dashboard'}" class="px-4 py-1 text-base text-slate-900 bg-white rounded transition-all duration-150 hover:scale-105">Dashboard</RouterLink>
+                    </div>
+
+                    <div v-else class="flex items-center gap-3">
+                        <RouterLink :to="{name: 'signin'}" class="px-4 py-1 text-base text-white bg-transparent border border-white rounded transition-all duration-150 hover:scale-105">Sign In</RouterLink>
+                        <RouterLink :to="{name: 'signup'}" class="px-4 py-1 text-base text-slate-900 bg-white border border-white rounded transition-all duration-150 hover:scale-105">Register</RouterLink>
+                    </div>
                 </div>
                 
             </div>
             <!-- end of nav for large screens -->
 
             <!-- start of nav for small screens -->
-            <div :class="mobileMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="fixed top-0 right-0 z-20 w-full h-full flex flex-col gap-y-10 py-5 bg-slate-900/50 backdrop-blur-xl items-center transition-all duration-150 lg:hidden">
+            <div :class="mobileMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="fixed top-0 right-0 z-20 w-full h-full flex flex-col gap-y-10 py-5 bg-slate-900/80 backdrop-blur-xl items-center transition-all duration-150 lg:hidden">
 
                 <div class="flex w-10/12 mx-auto justify-between items-center">
                     <AppLogo />
@@ -94,9 +114,17 @@ onMounted(() => {
                         <RouterLink @click.prevent="mobileMenu = false" to="/#contactus" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Contact Us</RouterLink>
                     </div>
 
-                    <div class="flex items-center justify-center gap-3 border-t border-slate-500 pt-5">
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'signin'}" class="px-4 py-1 text-base text-white bg-transparent border border-white rounded-md transition-all duration-150 hover:scale-105">Sign In</RouterLink>
-                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'signup'}" class="px-4 py-1 text-base text-slate-900 bg-white border border-white rounded-md transition-all duration-150 hover:scale-105">Register</RouterLink>
+                    <div>
+                        <div  v-if="isAuth" class="flex items-center justify-center gap-3 border-t border-slate-500 pt-5">
+                            <div>
+                                <button type="button" @click.prevent="store.userSignOut.modal = true" class="px-4 py-1 text-base text-white bg-transparent border border-transparent rounded-md transition-all duration-150 hover:border-white hover:scale-105">Sign Out</button>
+                            </div>
+                            <RouterLink :to="{name: 'dashboard'}" class="px-4 py-1 text-base text-slate-900 bg-white rounded transition-all duration-150 hover:scale-105">Dashboard</RouterLink>
+                        </div>
+                        <div v-else class="flex items-center justify-center gap-3 border-t border-slate-500 pt-5">
+                            <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'signin'}" class="px-4 py-1 text-base text-white bg-transparent border border-white rounded-md transition-all duration-150 hover:scale-105">Sign In</RouterLink>
+                            <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'signup'}" class="px-4 py-1 text-base text-slate-900 bg-white border border-white rounded-md transition-all duration-150 hover:scale-105">Register</RouterLink>
+                        </div>
                     </div>
                 
                 </div>

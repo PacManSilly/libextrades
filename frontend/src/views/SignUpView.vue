@@ -14,9 +14,6 @@ const router = useRouter()
 
 // store
 const store = useUserStore()
-// store.$subscribe((mutation, state) => {
-//     if (state.userSignUp.success) router.push({name: 'signin'})
-// })
 
 // data
 const error = ref(null)

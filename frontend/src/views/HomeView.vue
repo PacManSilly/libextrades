@@ -14,7 +14,7 @@ import AppHomeFooter from '../components/AppHomeFooter.vue';
 </script>
 
 <template>
-    <div class="relative w-full h-full min-h-full flex flex-col bg-slate-900">
+    <div class="relative w-full h-full min-h-full flex flex-col bg-slate-900 overflow-x-hidden">
 
         <!-- start of nav -->
         <nav class="absolute top-0 right-0 w-full">

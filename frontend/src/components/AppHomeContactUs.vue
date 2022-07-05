@@ -2,14 +2,33 @@
 /* eslint-disable */
 import IconPhoneOutline from './icons/IconPhoneOutline.vue'
 import IconMail from './icons/IconMail.vue'
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { onMounted, ref } from 'vue';
+gsap.registerPlugin(ScrollTrigger);
+
+// refs
+const contactus = ref("")
+const contact1 = ref("")
+const contact2 = ref("")
+
+// methods
+const animContactUs = () => {
+    gsap.from([contact1.value, contact2.value], {scrollTrigger: {trigger: contactus.value, start: "200px bottom", markers: false, id: "contactus"}, duration: 1, y: 50, opacity: 0, stagger: 0.2})
+}
+
+// hooks
+onMounted(() => {
+    animContactUs()
+})
 </script>
 
 <template>
-    <div id="contactus" class="w-full h-full bg-slate-800 py-20">
+    <div id="contactus" ref="contactus" class="w-full h-full bg-slate-800 py-20">
 
-        <div class="w-11/12 h-full mx-auto flex items-center lg:w-10/12">
+        <div class="w-11/12 h-full mx-auto flex flex-col gap-y-10 md:flex-row md:items-center lg:w-10/12">
 
-            <div class="flex-1 flex flex-col gap-5">
+            <div ref="contact1" class="flex-1 flex flex-col gap-5">
                 <h2 class="text-white text-2xl font-black md:4xl">Contact Us</h2>
 
                 <span class="text-xs text-slate-400 md:text-sm">
@@ -23,7 +42,7 @@ import IconMail from './icons/IconMail.vue'
                 </div>
             </div>
 
-            <div class="flex-1 ">
+            <div ref="contact2" class="flex-1 ">
                 <p class="text-xs text-slate-400 font-normal md:text-sm">
                     The Transactions offered by this Website can be executed only by fully competent adults. Transactions with financial
                     instruments offered on the Website involve substantial risk and trading may be very risky. If you make Transactions

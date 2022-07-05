@@ -45,7 +45,7 @@ store.getMe()
                 <div class="flex flex-col gap-1">
                     <div class="w-40 h-40 flex items-center justify-center bg-slate-800 overflow-hidden">
                         <img v-if="store.userData.data.mugshot" :src="store.userData.data.mugshot" alt="Picture" class="w-full h-full object-cover object-center">
-                        <p v-else class="text-6xl font-black text-white">S</p>
+                        <p v-else class="text-6xl font-black text-white">{{store.userData.data.first_name[0]}}</p>
                     </div>
                     <p class="text-white text-xl font-medium">{{fullName}}</p>
                 </div>

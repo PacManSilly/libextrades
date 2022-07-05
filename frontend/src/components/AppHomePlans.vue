@@ -31,8 +31,8 @@ const navigateToSignUp = () => {
 }
 
 const animPlans = () => {
-   gsap.from(planHead.value, {scrollTrigger: {trigger: plan.value, start: "200px bottom", markers: true, id: "plan"}, duration: 1, y: 100, opacity: 0})
-   gsap.from(planCards, {scrollTrigger: {trigger: plan.value, start: "200px bottom", markers: true, id: "plan"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
+   gsap.from(planHead.value, {scrollTrigger: {trigger: plan.value, start: "200px bottom", markers: false, id: "plan"}, duration: 1, y: 100, opacity: 0})
+   gsap.from(planCards, {scrollTrigger: {trigger: plan.value, start: "400px bottom", markers: false, id: "plan"}, duration: 1, y: 100, opacity: 0, stagger: 0.2})
 }
 
 onMounted(() => {

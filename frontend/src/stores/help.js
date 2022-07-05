@@ -36,7 +36,7 @@ export const useHelp = defineStore({
             this.password.success = null
             this.password.error = null
 
-            await axios.post(`auth/help/password/reset/confirm/${data.uid}/${data.token}/`, data)
+            await axios.post(`api/auth/help/password/reset/confirm/${data.uid}/${data.token}/`, data)
                 .then((resp) => {
                     this.password.success = resp.data.detail
                     this.password.loading = false

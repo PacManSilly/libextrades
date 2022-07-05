@@ -43,13 +43,11 @@ const showPassword = ref(false)
                 focus:outline-none md:p-2 md:text-sm"
             />
 
-            <div @click.prevent class="absolute top-2 right-2 cursor-pointer">
-                <button type="button" @click.prevent="showPassword = false" v-if="showPassword" class="">
-                    <IconEyeOpenVue v-if="showPassword" />
+            <div class="absolute top-2 right-2 cursor-pointer">
+                <button type="button" @click.prevent="showPassword = !showPassword">
+                    <IconEyeOpenVue class="bg-slate-100 h-4 w-4 fill-slate-500 hover:fill-slate-900 md:h-5 md:w-5" v-if="showPassword" />
+                    <IconEyeCloseVue v-else class="bg-slate-100 h-4 w-4 fill-slate-500 hover:fill-slate-900 md:h-5 md:w-5" />
                 </button>
-                <div type="button" @click.prevent="showPassword = true" v-else class="">
-                    <IconEyeCloseVue />
-                </div>
             </div>
 
         </div>
