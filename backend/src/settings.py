@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.102', '192.168.43.208']
 
@@ -148,10 +148,23 @@ EMAIL_FILE_PATH = BASE_DIR / 'email/'
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER', 'support@libextrades.com')
 
 # Django security Settings
-CSRF_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_HTTPONLY = True
+# CSRF_COOKIE_DOMAIN = ".libextrades.com"
+# CSRF_COOKIE_SAMESITE = 'Lax'
+# CSRF_COOKIE_HTTPONLY = False
+# CSRF_COOKIE_SECURE = True
+
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SAMESITE = 'Lax'
+# SESSION_COOKIE_HTTPONLY = True
+
+# SECURE_HSTS_SECONDS = 30
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = False
+# SECURE_SSL_REDIRECT = False
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 5621440
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 5621440
 
 
 # DjangoRestFramework settings
@@ -216,8 +229,15 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:3000',
+    'http://localhost:5000',
+    'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:5000',
+    'http://192.168.1.102:8000',
     'http://192.168.1.102:3000',
-    'http://192.168.43.208:3000'
+    'http://192.168.1.102:5000',
+    'http://192.168.43.208:8000',
+    'http://192.168.43.208:3000',
+    'http://192.168.43.208:5000',
 ]
 CORS_ALLOW_CREDENTIALS = True

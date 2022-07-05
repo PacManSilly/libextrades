@@ -58,7 +58,7 @@ onUnmounted(() => {
                     <div class="relative">
                         <button type="button" @click.prevent="tradesMenu = !tradesMenu" :to="{name: 'home'}" :class="tradesMenu ? 'text-white':'text-slate-400'" class="text-base font-normal hover:text-white">Trades</button>
 
-                        <div :class="tradesMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="absolute top-10 -left-5 flex flex-col shadow-lg bg-slate-800 rounded-lg w-40 transition-all duration-150">
+                        <div :class="tradesMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="absolute z-20 top-10 -left-5 flex flex-col shadow-lg bg-slate-800 rounded-lg w-40 transition-all duration-150">
                             <RouterLink :to="{name: 'tradeforex'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Forex</RouterLink>
                             <RouterLink :to="{name: 'tradestock'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Stocks</RouterLink>
                             <RouterLink :to="{name: 'tradecrypto'}" class="px-4 py-2 text-base text-slate-400 font-normal transition-all duration-150 lg:hover:bg-slate-600 hover:text-white">Cryptos</RouterLink>
