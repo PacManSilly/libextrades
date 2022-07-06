@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.102', '192.168.43.208']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.102', '192.168.43.209']
 
 
 # Application definition
@@ -136,9 +136,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'investors.User'
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.privateemail.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
@@ -236,8 +236,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://192.168.1.102:8000',
     'http://192.168.1.102:3000',
     'http://192.168.1.102:5000',
-    'http://192.168.43.208:8000',
-    'http://192.168.43.208:3000',
-    'http://192.168.43.208:5000',
+    'http://192.168.43.209:8000',
+    'http://192.168.43.209:3000',
+    'http://192.168.43.209:5000',
 ]
 CORS_ALLOW_CREDENTIALS = True

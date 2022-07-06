@@ -44,7 +44,7 @@ onMounted(() => {
                 </header>
 
                 <p v-if="store.verify.error" class="text-red-600 text-lg font-bold">{{store.verify.error}}</p>
-                <p v-else-if="store.verify.success" class="text-green-600 text-lg font-bold">{{store.verify.success}}</p>
+                <p v-else-if="store.verify.success" class="text-green-600 text-lg font-bold">{{store.verify.success}} Redirecting...</p>
                 <p v-else class="text-slate-500 text-lg font-bold">Verifying your account. Please wait...</p>
             </div>
 
