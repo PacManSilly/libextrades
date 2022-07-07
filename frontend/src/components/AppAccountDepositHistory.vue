@@ -133,7 +133,7 @@ store.getInvestments()
                                         </template>
 
                                         <template #text>
-                                            bc1q0agxmcdkp9r4h57dpm583wnqg0cq4r7uc5lzmx
+                                            bc1q4dxfnlt97hlvuu32nl253ua6t87kvfvd93zywf
                                         </template>
                                     </AppCopyText>
                                     <!-- end of coin address and copy button -->

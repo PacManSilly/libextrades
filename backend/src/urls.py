@@ -16,7 +16,7 @@ urlpatterns = [
     # Reset password via email endpoingt
     path("auth/help/password/reset/", dj_rest.PasswordResetView.as_view(), name="password_reset"),
     # this url endpoint is sent to the user
-    path("auth/help/password/reset/confirm/<str:uidb64>/<str:token>/", dj_rest.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("password/reset/confirm/<str:uidb64>/<str:token>/", dj_rest.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
