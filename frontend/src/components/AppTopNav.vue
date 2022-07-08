@@ -89,7 +89,7 @@ onUnmounted(() => {
             <!-- end of nav for large screens -->
 
             <!-- start of nav for small screens -->
-            <div :class="mobileMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="fixed top-0 right-0 z-20 w-full h-full flex flex-col gap-y-10 py-5 bg-slate-900/80 backdrop-blur-xl items-center transition-all duration-150 lg:hidden">
+            <div :class="mobileMenu ? 'scale-100 opacity-100':'scale-0 opacity-0'" class="fixed top-0 right-0 z-50 w-full h-full flex flex-col gap-y-10 py-5 bg-slate-900/80 backdrop-blur-xl items-center transition-all duration-150 lg:hidden">
 
                 <div class="flex w-10/12 mx-auto justify-between items-center">
                     <AppLogo />

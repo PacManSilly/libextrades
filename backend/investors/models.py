@@ -122,6 +122,7 @@ class User(AbstractUser):
     investment_plan = models.CharField(_("Investment Plan"), max_length=255, blank=True, null=False, default="....", help_text=_("Investors investment plan"))
     total_investment = models.CharField(_("Total Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total investment"))
     current_investment = models.CharField(_("Current Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors currrent investment"))
+    interest_rate = models.CharField(_("Interest Rate"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Interest rate for the current investment plan"))
     total_earnings = models.CharField(_("Total Earnings"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total earnings"))
     total_balance = models.CharField(_("Total Balance"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total balance"))
 

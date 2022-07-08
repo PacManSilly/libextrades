@@ -46,7 +46,7 @@ store.getMe()
                         <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Current Investment</span>
                         <p class="text-slate-100 font-bold text-xl tracking-wider md:text-2xl lg:text-3xl">${{store.userData.data.current_investment}}</p>
                         <span class="text-xs font-medium mt-4">
-                            <span class="text-green-500">%</span>
+                            <span class="text-green-500">%{{store.userData.data.interest_rate}}</span>
                             <span class="text-slate-400">/daily</span>
                         </span>
                     </div>

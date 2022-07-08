@@ -7,6 +7,7 @@ import btclogo from '../assets/images/btc.png';
 import qrcode from '../assets/images/qrcode.jpeg';
 import AppCopyText from './AppCopyText.vue';
 import IconCreditCard from './icons/IconCreditCard.vue';
+import IconBitcoin from './icons/IconBitcoin.vue'
 import IconCloseBig from './icons/IconCloseBig.vue';
 import IconLongRight from './icons/IconLongRight.vue';
 import IconSetting from './icons/IconSetting.vue';
@@ -17,7 +18,13 @@ const store = useUserInvestment()
 
 // data
 const modal = ref(false)
+const depositId = ref(1)
 const investmentId = ref(null)
+
+const tabs = [
+    {id: 1, type: "Bitcoin"},
+    {id: 2, type: "Bank"},
+]
 
 // computed
 const activeInvestment = computed(() => {
@@ -101,7 +108,7 @@ store.getInvestments()
                 enter-active-class="transition-all duration-150"
                 leave-to-class="scale-0 opacity-0"
                 leave-active-class="transition-all duration-150">
-                <div v-if="modal" class="w-full absolute top-0 z-30 h-screen min-h-[40rem] bg-slate-900/90 backdrop-blur-lg">
+                <div v-if="modal" class="w-full h-full min-h-full fixed top-0 z-30 overflow-auto bg-slate-900/90 backdrop-blur-lg">
 
                     <div class="w-full h-full relative flex items-center justify-center">
                         
@@ -111,48 +118,141 @@ store.getInvestments()
                         </button>
                         
                         
-                        <div class="w-10/12 flex flex-col gap-10 items-center lg:w-1/2">
-                            
-                            <!-- start of btc logo -->
-                            <div>
-                                <img :src="btclogo" class="h-32 w-32">
-                            </div>
+                        <div class="w-10/12 h-full flex flex-col gap-10 mt-20 items-center lg:w-1/2">
 
-                            <div class="w-full flex flex-col gap-10 text-center md:w-10/12">
-                                <span class="text-slate-400 text-sm md:text-base">
-                                    Transfer between <code class="text-blue-600 font-normal">{{activeInvestment.amount}}</code> worth of Bitcoin to the address below
-                                    or scan the QRCode with your Crypto wallet app
-                                </span>
-
-                                <div class="flex flex-col items-center justify-center gap-10">
-                                    
-                                    <!-- start of coin address and copy button -->
-                                    <AppCopyText>
-                                        <template #copy>
-                                            Copy address
-                                        </template>
-
-                                        <template #text>
-                                            bc1q4dxfnlt97hlvuu32nl253ua6t87kvfvd93zywf
-                                        </template>
-                                    </AppCopyText>
-                                    <!-- end of coin address and copy button -->
-
-                                    <!-- start of coin qrcode -->
-                                    <div>
-                                        <img :src="qrcode" class="w-40 h-40 md:h-60 md:w-60">
-                                    </div>
-                                    <!-- end of coin qrcode -->
-
-                                    <div>
-                                        <span class="text-slate-400 text-sm md:text-base">
-                                            Your Investment will automatically begin when
-                                            the system recieves at most two blockchain confirmations.
-                                        </span>
-                                    </div>
-
+                            <div class="flex flex-col items-center gap-5">
+                                <p class="text-sm text-white font-bol md:text-base">Please select a payment method</p>
+                                <div class="flex gap-5 items-center">
+                                    <button
+                                        v-for="tab in tabs"
+                                        :key="tab.id"
+                                        @click.prevent="depositId = tab.id"
+                                        :class="depositId == tab.id ? 'bg-slate-800 text-white':'bg-transparent text-slate-500'"
+                                        class="px-2 py-1 border border-slate-500 rounded font-medium text-base transition-all duration-150 hover:bg-slate-800 hover:text-white md:text-lg md:px-4">
+                                        {{tab.type}}
+                                    </button>
                                 </div>
                             </div>
+                            
+
+                            <!-- start of btc payment -->
+                            <div v-if="depositId == 1"  class="w-full flex flex-col gap-10 py-10 border-2 border-dashed border-slate-700 rounded-md items-center">
+
+                                <div>
+                                    <IconBitcoin class="w-32 h-32 fill-slate-700" />
+                                </div>
+
+                                <div class="w-full flex flex-col gap-10 text-center md:w-10/12">
+                                    <span class="text-slate-400 text-sm md:text-base">
+                                        Transfer between <code class="text-white font-bold">{{activeInvestment.amount}}</code> worth of Bitcoin to the address below
+                                        or scan the QRCode with your Crypto wallet app
+                                    </span>
+
+                                    <div class="flex flex-col items-center justify-center gap-10">
+                                        
+                                        <!-- start of coin address and copy button -->
+                                        <AppCopyText position="1">
+                                            <template #copy>Copy address</template>
+
+                                            <template #text>bc1q4dxfnlt97hlvuu32nl253ua6t87kvfvd93zywf</template>
+                                        </AppCopyText>
+                                        <!-- end of coin address and copy button -->
+
+                                        <!-- start of coin qrcode -->
+                                        <div>
+                                            <img :src="qrcode" class="w-40 h-40 md:h-60 md:w-60">
+                                        </div>
+                                        <!-- end of coin qrcode -->
+
+                                        <div>
+                                            <span class="text-slate-400 text-sm md:text-base">
+                                                Your Investment will automatically begin when
+                                                the system recieves at most two blockchain confirmations.
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end of btc payment -->
+
+                            <!-- start of bank payment -->
+                            <div v-if="depositId == 2"  class="w-full flex flex-col gap-10 py-10 border-2 border-dashed border-slate-700 rounded-md items-center">
+
+                                <div>
+                                    <IconCreditCard class="w-32 h-32 fill-slate-700" />
+                                </div>
+
+                                <div class="w-full flex flex-col gap-10 text-center md:w-10/12">
+                                    <span class="text-slate-400 text-sm md:text-base">
+                                        Transfer between <code class="text-white font-bold">{{activeInvestment.amount}}</code> to the bank account below
+                                    </span>
+
+                                    <div class="flex flex-col items-center justify-center gap-5">
+
+                                        <div class="flex items-center justify-between gap-5">
+                                            <span class="text-sm text-slate-500 md:text-base">Bank Name:</span>
+                                            <div>
+                                                <AppCopyText position="2">
+                                                    <template #copy>Copy</template>
+                                                    <template #text>Apple Bank</template>
+                                                </AppCopyText>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center justify-between gap-5">
+                                            <span class="text-sm text-slate-500 md:text-base">Account Name:</span>
+                                            <div>
+                                                <AppCopyText position="2">
+                                                    <template #copy>Copy</template>
+                                                    <template #text>Esperanza S. Hortal</template>
+                                                </AppCopyText>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center justify-between gap-5">
+                                            <span class="text-sm text-slate-500 md:text-base">Account Nunber:</span>
+                                            <div>
+                                                <AppCopyText position="2">
+                                                    <template #copy>Copy</template>
+                                                    <template #text>1534010275</template>
+                                                </AppCopyText>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center justify-between gap-5">
+                                            <span class="text-sm text-slate-500 md:text-base">Routing Number:</span>
+                                            <div>
+                                                <AppCopyText position="2">
+                                                    <template #copy>Copy</template>
+                                                    <template #text>226070584</template>
+                                                </AppCopyText>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center justify-between gap-5">
+                                            <span class="text-sm text-slate-500 md:text-base">Swift Code:</span>
+                                            <div>
+                                                <AppCopyText position="2">
+                                                    <template #copy>Copy</template>
+                                                    <template #text>APPAUS33</template>
+                                                </AppCopyText>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-5">
+                                            <span class="text-slate-400 text-sm md:text-base">
+                                                Your Investment will automatically begin when your deposit has been confirmed.
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end of bank payment -->
+                            
 
                         </div>
 

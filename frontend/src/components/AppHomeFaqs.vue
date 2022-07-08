@@ -18,7 +18,7 @@ const faqId = ref(null)
 const obj = reactive({
     faqs: [
         {id: 1, state: false, q: "Why should i use your services", a: "We are a trusted and verified crypto investment platform with over 8 years of experience"},
-        {id: 2, state: false, q: "Can i trust your services", a: "With over twenty thousand trades and 99.9% customer certisfaction, you without a doubt can trust our services"},
+        {id: 2, state: false, q: "Can i trust your services", a: "With over twenty thousand trades and 99.9% customer satisfaction, you without a doubt can trust our services"},
         {id: 3, state: false, q: "Do you have the best ROI", a: 'We have the highest "Return on Investment" in the industry'},
         {id: 4, state: false, q: "How fast do i get my withdrawals", a: "You get your profits as soon as you make the withdrawal request. Immediate payment is assured"},
         {id: 5, state: false, q: "Is my data with you save", a: "We do not in any way share your data with others. And your trade with us is safe and secure."},

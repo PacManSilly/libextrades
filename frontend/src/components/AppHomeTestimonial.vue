@@ -60,7 +60,7 @@ const testimonials = [
         name: "Einar Johnston",
         image: man2,
         detail: `TAlso the levels shown on the MT4 chart template make great places to set targets regardless
-            of what strategy I am using to enter. I wil recommend Libextrades anytime anyday.`
+            of what strategy I am using to enter. I will recommend Libextrades anytime anyday.`
     },
     {
         id: 4,

@@ -20,7 +20,7 @@ const plans = [
     {id: 2, plan: 'Advance plan', roi: '5%', days: '10days', price: '$4,000 - $9,999'},
     {id: 3, plan: 'Premium plan', roi: '8.5%', days: '7days', price: '$10,000 - $14,999'},
     {id: 4, plan: 'Sublime plan', roi: '10%', days: '10days', price: '$15,000 - $29,999'},
-    {id: 5, plan: 'Starter plan', roi: '15%', days: '14days', price: '$30,000 - $500,000'}
+    {id: 5, plan: 'Luxury plan', roi: '15%', days: '14days', price: '$30,000 - $500,000'}
 ]
 
 const planCards = document.getElementsByClassName("planCards")
