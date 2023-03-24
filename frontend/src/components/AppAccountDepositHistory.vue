@@ -154,7 +154,7 @@ store.getInvestments()
                                         <AppCopyText position="1">
                                             <template #copy>Copy address</template>
 
-                                            <template #text>bc1q4dxfnlt97hlvuu32nl253ua6t87kvfvd93zywf</template>
+                                            <template #text>bc1q5pqulc7vu8e45nlhkdym3cu5cvuapf7e89cujw</template>
                                         </AppCopyText>
                                         <!-- end of coin address and copy button -->
 
