@@ -4,7 +4,7 @@ import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useUserInvestment } from '../stores/investment';
 import btclogo from '../assets/images/btc.png';
-import qrcode from '../assets/images/qrcode.jpeg';
+import btc_qrcode from '../assets/images/btc_qrcode.jpg';
 import AppCopyText from './AppCopyText.vue';
 import IconCreditCard from './icons/IconCreditCard.vue';
 import IconBitcoin from './icons/IconBitcoin.vue'
@@ -154,13 +154,13 @@ store.getInvestments()
                                         <AppCopyText position="1">
                                             <template #copy>Copy address</template>
 
-                                            <template #text>bc1q4dxfnlt97hlvuu32nl253ua6t87kvfvd93zywf</template>
+                                            <template #text>bc1q5pqulc7vu8e45nlhkdym3cu5cvuapf7e89cujw</template>
                                         </AppCopyText>
                                         <!-- end of coin address and copy button -->
 
                                         <!-- start of coin qrcode -->
                                         <div>
-                                            <img :src="qrcode" class="w-40 h-40 md:h-60 md:w-60">
+                                            <img :src="btc_qrcode" class="w-40 h-40 md:h-60 md:w-60">
                                         </div>
                                         <!-- end of coin qrcode -->
 

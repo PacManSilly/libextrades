@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory, useRouter } from "vue-router";
 import { useUserStore } from '../stores/user';
 import HomeView from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
 import AccountView from "../views/AccountView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
@@ -13,6 +14,12 @@ const router = createRouter({
       name: "home",
       component: HomeView,
       meta: {title: "LibExTrades | Welcome"},
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: AboutView,
+      meta: {title: "LibExTrades | About Us"},
     },
     {
       path: "/trade",

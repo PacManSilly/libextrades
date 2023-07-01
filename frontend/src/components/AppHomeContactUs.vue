@@ -36,9 +36,9 @@ onMounted(() => {
                     North York, ON M3H 2S7, Canada. 
                 </span>
 
-                <div class="flex items-center gap-5">
-                    <IconMail class="w-7 h-7 fill-slate-400" />
-                    <span class="text-xs text-slate-400 md:text-sm">support@libextrades.com</span>
+                <div class="flex items-center gap-3 md:gap-5">
+                    <IconMail class="w-5 h-5 fill-slate-400 md:w-7 md:h-7" />
+                    <a href="mailto:support@libextrades.com" class="text-xs text-slate-400 md:text-sm">support@libextrades.com</a>
                 </div>
             </div>
 

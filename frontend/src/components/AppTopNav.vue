@@ -1,7 +1,7 @@
 <script setup>
 /* eslint-disable */
 import { ref, onMounted, computed, onUnmounted } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import { useUserStore } from '../stores/user';
 import AppLogo from './AppLogo.vue';
 import IconHamburger from './icons/IconHamburger.vue';
@@ -14,6 +14,9 @@ const root = ref(null)
 
 // stores
 const store = useUserStore()
+
+// route
+const route = useRoute()
 
 // computed
 const isAuth = computed(() => {
@@ -52,6 +55,7 @@ onUnmounted(() => {
 
                 <div class="flex gap-x-10">
                     
+                    <RouterLink :to="{name: 'about'}" :class="route.name == 'about' ? 'text-white':'text-slate-400'" class="text-base font-normal hover:text-white">About</RouterLink>
                     <RouterLink to="/#steps" class="text-base text-slate-400 font-normal hover:text-white">Steps</RouterLink>
                     <RouterLink to="/#plans" class="text-base text-slate-400 font-normal hover:text-white">Plans</RouterLink>
 
@@ -102,6 +106,7 @@ onUnmounted(() => {
                 <div class="w-10/12 flex flex-col gap-y-10 mx-auto">
 
                     <div class="grid grid-cols-2 gap-3 text-left">
+                        <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'about'}" :class="route.name == 'about' ? 'text-white':'text-slate-400'" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">About</RouterLink>
                         <RouterLink @click.prevent="mobileMenu = false" to="/#steps" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Steps</RouterLink>
                         <RouterLink @click.prevent="mobileMenu = false" to="/#plans" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Plans</RouterLink>
                         <RouterLink @click.prevent="mobileMenu = false" :to="{name: 'tradeforex'}" class="p-2 rounded-md text-base text-slate-400 font-normal transition-all duration-150 hover:bg-slate-800 hover:text-white">Forex</RouterLink>
