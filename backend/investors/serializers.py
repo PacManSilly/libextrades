@@ -1,4 +1,4 @@
-from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders
+from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders, Transaction
 from dj_rest_auth import serializers as dj_rest_auth_serializer
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
@@ -59,6 +59,15 @@ class InvestorInvestmentSerializer(serializers.ModelSerializer):
 class InvestorWithdrawalSerializer(serializers.ModelSerializer):
     class Meta:
         model = InvestorWithdrawal
+        fields = "__all__"
+        extra_kwargs = {
+            'investor': {'read_only': True}
+        }
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
         fields = "__all__"
         extra_kwargs = {
             'investor': {'read_only': True}

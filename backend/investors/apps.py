@@ -9,5 +9,8 @@ class InvestorsConfig(AppConfig):
     name = 'investors'
     def ready(self) -> None:
         from . import signals
+        from .models import InvestorInvestment, InvestorWithdrawal
 
         post_save.connect(signals.new_user, sender=settings.AUTH_USER_MODEL, dispatch_uid=uuid.uuid4())
+        post_save.connect(signals.new_deposit, sender=InvestorInvestment, dispatch_uid=uuid.uuid4())
+        post_save.connect(signals.new_withdrawal, sender=InvestorWithdrawal, dispatch_uid=uuid.uuid4())

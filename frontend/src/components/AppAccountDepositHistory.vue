@@ -42,7 +42,20 @@ const deposit = (id) => {
 }
 
 const toDate = (value) => {
-    return new Date(value).toDateString()
+    const dateDate = new Date(value).toDateString()
+    const dateTime = new Date(value).toLocaleTimeString()
+
+    return `${dateDate} ${dateTime}`
+}
+
+// methods
+const toCurrency = (value) => {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+    return currencyFormatter.format(value)
 }
 
 // created
@@ -91,8 +104,33 @@ store.getInvestments()
                         </div>
                     </div>
 
-                    <div class="mt-5 flex flex-col gap-4 md:gap-2">
+                    <!-- <div class="mt-5 flex flex-col gap-4 md:gap-2">
                         <AppInvestmentCard @pay-now="deposit(investment.id)" v-for="investment in store.investments.data" :key="investment.id" v-bind="investment" />
+                    </div> -->
+
+                    <div class="bg-slate-900 max-h-96 overflow-auto">
+                        <table class="w-full table-auto border-collapse border-spacing-2 min-w-[20rem]">
+                            <thead class="">
+                                <tr class="text-slate-300">
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Plan</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Amount invested</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Status</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Date created</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="investment in store.investments.data" :key="investment.id" class="border-b border-slate-800 text-center last:border-none">
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.plan }}</td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.amount }}</td>
+                                    <td class="p-4 text-sm text-slate-500">
+                                        <span :class="investment.status == 'Active' ? 'bg-green-600':'bg-yellow-600'" class="text-white inline-block px-2 py-1 rounded-md">{{ investment.status }}</span>
+                                    </td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ toDate(investment.created) }}</td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.days }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

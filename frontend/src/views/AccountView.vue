@@ -1,17 +1,26 @@
 <script setup>
 /* eslint-disable */
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { RouterView } from 'vue-router';
 import AppAccountSideNavVue from '../components/AppAccountSideNav.vue';
 import IconHamburger from '../components/icons/IconHamburger.vue';
 import AppUserAvatar from '../components/AppUserAvatar.vue';
+import { computed } from 'vue';
+import { useUserStore } from '../stores/user';
+import IconUserClose from '../components/icons/IconUserClose.vue';
+import IconSetting from '../components/icons/IconSetting.vue';
+import IconHome from '../components/icons/IconHome.vue';
 
-// data
+// refs
 const menu = ref(false)
 
-// on mounted hook
-onMounted(() => {
-    // document.addEventListener("click", closeMenu)
+// stores
+const store = useUserStore()
+
+// computed
+const isAuthenticated = computed(() => {
+  if (JSON.parse(localStorage.getItem('libex_token'))) return true
+  else return false
 })
 </script>
 
@@ -26,9 +35,17 @@ onMounted(() => {
                     <button @click.prevent="menu = true" class="block lg:hidden" type="button">
                         <IconHamburger class="w-10 h-10 fill-slate-600 hover:fill-slate-100" />
                     </button>
-                    <button>
+                    <div class="flex items-center gap-x-3">
+                        <RouterLink :to="{name: 'dashboard'}">
+                            <IconHome class="w-7 h-7 text-slate-400" />
+                        </RouterLink>
+
                         <AppUserAvatar />
-                    </button>
+
+                        <RouterLink :to="{name: 'settings'}">
+                            <IconSetting class="w-7 h-7 text-slate-400" />
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
 
@@ -56,6 +73,35 @@ onMounted(() => {
 
 
         </div>
+
+
+        
+
+        <!-- is suspended effect -->
+        <div v-if="store.userData.data.is_suspended" class="absolute top-0 left-0 right-0 w-full h-full bg-white/10 backdrop-blur-md z-30">
+
+            <div class="w-10/12 h-full flex flex-col justify-center mx-auto md:w-7/12 lg:w-5/12">
+
+                <div class="flex flex-col">
+                    <IconUserClose class="w-32 h-32 text-slate-400 md:h-40 md:w-40" />
+                    <p class="text-3xl font-black text-slate-400">Account Suspended</p>
+                </div>
+
+                <div class="bg-black w-full flex flex-col gap-y-3 py-10 px-10 mt-5">
+                    <p class="text-xl text-slate-400 font-black md:text-2xl">This account has been suspended.</p>
+                    <span class="flex items-center gap-x-2 text-white">
+                        <p>Please contact</p>
+                        <a href="mailto:support@libextrades.com" class="text-blue-400 font-black hover:text-blue-500">support</a>
+                    </span>
+
+                    <span class="mt-10">
+                        <button type="button" @click="store.userSignOut.modal = true" class="text-blue-400">Sign out</button>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <!-- is suspended effect -->
 
     </div>
 </template>

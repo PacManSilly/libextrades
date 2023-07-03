@@ -1,4 +1,4 @@
-from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders
+from .models import InvestorInvestment, InvestorWithdrawal, ExpertTraders, Transaction
 from rest_framework import status, views, viewsets, permissions
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils.translation import gettext_lazy as _
@@ -210,6 +210,24 @@ class InvestorWithdrawalApiViewset(viewsets.GenericViewSet):
         investment.delete()
         data = {'id': id , 'plan': plan, 'amount': amount, 'detail': 'Deleted successfully'}
         return Response(data=data, status=status.HTTP_204_NO_CONTENT)
+
+
+class TransactionApiViewset(viewsets.GenericViewSet):
+    lookup_field = 'id'
+    queryset = Transaction.objects.all()
+    serializer_class = serializers.TransactionSerializer
+
+    def get_queryset(self):
+        investor = self.request.user
+        return investor.transaction_set.all()
+
+    def list(self, request, *args, **kwargs):
+        serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, id=None, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object(), context={'request': request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 class ExpertTraderApiViewSet(viewsets.GenericViewSet):

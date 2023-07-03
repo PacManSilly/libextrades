@@ -32,6 +32,18 @@ STATUS = (
     ('Pending', 'Pending')
 )
 
+WITHDRAWAL_STATUS = (
+    ('Pending', 'Pending'),
+    ('Declined', 'Declined'),
+    ('Processed', 'Processed'),
+)
+
+
+TRANSACTION_TYPE = (
+    ('Deposit', 'Deposit'),
+    ('Withdrawal', 'Withdrawal'),
+)
+    
 
 def save_image_investors(instance, filename):
     """
@@ -101,6 +113,9 @@ class User(AbstractUser):
         _("Is Verified"), default=False, blank=False, null=False,
         help_text=_("Investor email address is verified")
     )
+
+    is_suspended = models.BooleanField(default=False, blank=True, null=False, help_text=_("Is this user suspended or not"))
+
     kyc_front_view = models.ImageField(_("KYC Front View"), upload_to=save_image_investors, blank=True, null=True, help_text=_("KYC front view"))
     kyc_back_view = models.ImageField(_("KYC Back View"), upload_to=save_image_investors, blank=True, null=True, help_text=_("KYC back view"))
 
@@ -120,11 +135,12 @@ class User(AbstractUser):
 
     # investment
     investment_plan = models.CharField(_("Investment Plan"), max_length=255, blank=True, null=False, default="....", help_text=_("Investors investment plan"))
-    total_investment = models.CharField(_("Total Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total investment"))
-    current_investment = models.CharField(_("Current Investment"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors currrent investment"))
-    interest_rate = models.CharField(_("Interest Rate"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Interest rate for the current investment plan"))
-    total_earnings = models.CharField(_("Total Earnings"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total earnings"))
-    total_balance = models.CharField(_("Total Balance"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total balance"))
+    account_balance = models.CharField(_("Account balance"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors acount balance"))
+    total_profit = models.CharField(_("Total profit"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total profit"))
+    bonus = models.CharField(_("Bonus"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors bonus"))
+    referral_bonus = models.CharField(_("Referral bonus"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors referral bonus"))
+    total_deposit = models.CharField(_("Total deposit"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total deposit"))
+    total_withdrawal = models.CharField(_("Total withdrawal"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total withdrawal"))
 
     objects = UserManager()
 
@@ -136,6 +152,21 @@ class User(AbstractUser):
 
     def get_full_name(self) -> str:
         return F"{self.first_name or ''} {self.last_name or ''} {self.other_name or ''}"
+
+
+class Transaction(models.Model):
+    """
+    Investors transactions
+    """
+    id = models.BigAutoField(_("ID"), unique=True, primary_key=True, editable=False, help_text=_("Database ID"))
+    investor = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Investor"), on_delete=models.CASCADE)
+    transaction_type = models.CharField(_("Status"), choices=TRANSACTION_TYPE, max_length=10, default='Pending', help_text=_("Transaction type"))
+    amount = models.CharField(_("Amount"), max_length=50, blank=True, null=True, help_text=_("Amount invested in this plan"))
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
+    status = models.CharField(_("Status"), choices=STATUS, max_length=10, default='Pending', help_text=_("Status of this investment"))
+
+    def __str__(self) -> str:
+        return f"{self.investor} - {self.transaction_type}"
 
 
 class InvestorInvestment(models.Model):
@@ -171,6 +202,7 @@ class InvestorWithdrawal(models.Model):
     account_number = models.CharField(_("Account Number"), max_length=255, blank=True, null=True, help_text=_("Bank account number"))
     swift_code = models.CharField(_("Swift Code"), max_length=255, blank=True, null=True, help_text=_("Bank Swift Code"))
     amount = models.CharField(_("Amount"), max_length=50, blank=True, null=True, help_text=_("Amount to withdraw"))
+    status = models.CharField(_("Status"), choices=WITHDRAWAL_STATUS, max_length=10, default='Pending', help_text=_("Status of this withdrawal"))
 
     def __str__(self):
         return F"{self.investor} - ({self.method}) - (${self.amount})"

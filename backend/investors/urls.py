@@ -35,6 +35,10 @@ urlpatterns = [
     path('withdrawals/<int:id>/update/', apis.InvestorWithdrawalApiViewset.as_view({'put': 'update', 'patch': 'update'}), name='withdrawals_update'),
     path('withdrawals/<int:id>/delete/', apis.InvestorWithdrawalApiViewset.as_view({'delete': 'destroy'}), name='withdrawals_delete'),
 
+    # Transaction endpoints
+    path('transactions/', apis.TransactionApiViewset.as_view({'get': 'list'}), name='transaction_list'),
+    path('transactions/<int:id>/', apis.TransactionApiViewset.as_view({'get': 'retrieve'}), name='transaction_detail'),
+
     # expert traders endpoint
     path('experts/', apis.ExpertTraderApiViewSet.as_view({'get': 'list'}), name="experts_list"),
     path('experts/new/', apis.ExpertTraderApiViewSet.as_view({'post': 'create'}), name="experts_create"),

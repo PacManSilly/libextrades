@@ -1,4 +1,4 @@
-from .models import User, InvestorInvestment, InvestorWithdrawal, ExpertTraders
+from .models import User, InvestorInvestment, InvestorWithdrawal, ExpertTraders, Transaction
 from .forms import CustomAppUserCreationForm, CustomAppUserChangeForm
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.admin import UserAdmin
@@ -28,8 +28,8 @@ class UserModelAdmin(UserAdmin):
         ("Identification", {"fields": ("id", "email", "phone", "password", "kyc_front_view", "kyc_back_view"), }),
         ("Bio", {"fields": ("first_name", "last_name", "other_name", "dob", "gender", "mugshot"), }),
         ("Location", {"fields": ("country", "state", "city", "postal", )}),
-        ("Investment", {"fields": ("total_investment", "current_investment", "interest_rate", "total_earnings", "total_balance")}),
-        ("Status", {"fields": ("is_verified", "is_active", "is_staff", "is_superuser"), }),
+        ("Investment", {"fields": ("account_balance", "total_profit", "bonus", "referral_bonus", "total_deposit", "total_withdrawal")}),
+        ("Status", {"fields": ("is_verified", "is_suspended", "is_active", "is_staff", "is_superuser"), }),
         ("Groups & Permissions", {"fields": ("groups", "user_permissions"), }),
         ("Important Dates", {"fields": ("date_joined", "last_login"), }),
     )
@@ -53,6 +53,13 @@ class InvestorWithdrawalAdmin(admin.ModelAdmin):
     list_filter = ('method',)
 
 
+class TransactionAdmin(admin.ModelAdmin):
+    model = Transaction
+    list_display = ('id', 'investor', 'transaction_type', 'created')
+    list_display_links = ('id', 'investor')
+    list_filter = ('transaction_type', 'status')
+    
+
 class ExpertTradersAdmin(admin.ModelAdmin):
     model = ExpertTraders
     list_display = ('id', 'full_name', 'win_rate', 'profit_share')
@@ -68,3 +75,4 @@ admin_site.register(User, UserModelAdmin)
 admin_site.register(InvestorInvestment, InvestorInvestmentAdmin)
 admin_site.register(InvestorWithdrawal, InvestorWithdrawalAdmin)
 admin_site.register(ExpertTraders, ExpertTradersAdmin)
+admin_site.register(Transaction, TransactionAdmin)

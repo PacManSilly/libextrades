@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: serve --listen 8080 --single /home/dockeruser/app/dist
+    container_name: libextrades-web
+    env_file:
+      - /home/${USER}/.env.libextrades
+    expose:
+      - 8080
+    environment:
+      - VIRTUAL_PORT=8080
+      - VIRTUAL_PATH=/
+    restart: always
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: gunicorn --config gunicorn.conf.py src.wsgi:application
+    container_name: libextrades-api
+    expose:
+      - 8000
+    env_file:
+      - /home/${USER}/.env.libextrades
+    environment:
+      - VIRTUAL_PATH=~^/(api|admin)/
+    volumes:
+      - static_volume:/home/dockeruser/app/staticfiles
+      - media_volume:/home/dockeruser/app/mediafiles
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    container_name: libextrades-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - /home/${USER}/.env.libextrades
+    
+  nginx-proxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: libextrades-nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - static_volume:/home/dockeruser/app/staticfiles
+      - media_volume:/home/dockeruser/app/mediafiles
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - web
+      - api
+
+  nginx-proxy-letsencrypt:
+    image: nginxproxy/acme-companion:2.2
+    container_name: libextrades-nginx-letsencrypt
+    env_file:
+      - /home/${USER}/.env.libextrades
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:
+  certs:
+  html:
+  vhost:
+  acme:

@@ -47,7 +47,7 @@ const isRoute = (value) => {
                 <!-- deposit link -->
                 <RouterLink @click="$emit('navClicked')" :to="{name: 'deposit'}" :class="isRoute('deposit') ? 'bg-gray-900':'bg-transparent'" class="group flex items-center justify-start gap-2 px-4 py-2 text-base font-medium bg-transparent transition-all duration-150 rounded-xl hover:bg-slate-900">
                     <IconTrendingDown :class="isRoute('deposit') ? 'fill-slate-100':'fill-slate-600'" class="w-7 h-7 group-hover:fill-slate-100" />
-                    <p :class="isRoute('deposit') ? 'text-slate-100':'text-slate-600'" class="self-end group-hover:text-slate-100">Deposit</p>
+                    <p :class="isRoute('deposit') ? 'text-slate-100':'text-slate-600'" class="self-end group-hover:text-slate-100">Invest</p>
                 </RouterLink>
                 <!-- withdrawal link -->
                 <RouterLink @click="$emit('navClicked')" :to="{name: 'withdrawal'}" :class="isRoute('withdrawal') ? 'bg-gray-900':'bg-transparent'" class="group flex items-center justify-start gap-2 px-4 py-2 text-base font-medium bg-transparent transition-all duration-150 rounded-xl hover:bg-slate-900">

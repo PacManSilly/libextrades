@@ -15,7 +15,20 @@ const isEmpty = computed(() => {
 })
 
 const toDate = (value) => {
-    return new Date(value).toDateString()
+    const dateDate = new Date(value).toDateString()
+    const dateTime = new Date(value).toLocaleTimeString()
+
+    return `${dateDate} ${dateTime}`
+}
+
+// methods
+const toCurrency = (value) => {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+    return currencyFormatter.format(value)
 }
 
 // created
@@ -64,8 +77,31 @@ store.getWithdrawals()
                         </div>
                     </div>
 
-                    <div class="mt-5 flex flex-col gap-2">
+                    <!-- <div class="mt-5 flex flex-col gap-2">
                         <AppWithdrawalCard v-for="withdrawal in store.withdrawals.data" :key="withdrawal.id" v-bind="withdrawal" />
+                    </div> -->
+
+                    <div class="bg-slate-900 max-h-96 overflow-auto">
+                        <table class="w-full table-auto border-collapse border-spacing-2 min-w-[20rem]">
+                            <thead class="">
+                                <tr class="text-slate-300">
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Amount + charges</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Receiving mode</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Status</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Date created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="withdrawal in store.withdrawals.data" :key="withdrawal.id" class="border-b border-slate-800 text-center last:border-none">
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ toCurrency(withdrawal.amount) }}</td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ withdrawal.method }}</td>
+                                    <td class="p-4 text-sm text-slate-500">
+                                        <span :class="withdrawal.status == 'Processed' ? 'bg-green-600':'bg-yellow-600'" class="text-white inline-block px-2 py-1 rounded-md">{{ withdrawal.status}}</span>
+                                    </td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ toDate(withdrawal.created) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
