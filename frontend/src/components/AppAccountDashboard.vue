@@ -178,7 +178,7 @@ storeTransaction.getTransactions()
                 </span>
 
                 <div class="bg-slate-900 max-h-96 overflow-auto">
-                    <table class="w-full table-auto border-collapse border-spacing-2">
+                    <table class="w-full table-auto border-collapse border-spacing-2 min-w-[20rem]">
                         <thead class="">
                             <tr class="text-slate-300">
                                 <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Transaction</th>
