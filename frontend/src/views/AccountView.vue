@@ -31,7 +31,7 @@ const isAuthenticated = computed(() => {
 
             <!-- start of top nav-->
             <div class="absolute top-0 w-full lg:w-auto z-10 bg-slate-900 lg:bg-transparent lg:right-10">
-                <div class="w-11/12 mx-auto py-6 px-4 flex justify-between items-center">
+                <div class="w-full mx-auto py-6 px-4 flex justify-between items-center">
                     <button @click.prevent="menu = true" class="block lg:hidden" type="button">
                         <IconHamburger class="w-10 h-10 fill-slate-600 hover:fill-slate-100" />
                     </button>

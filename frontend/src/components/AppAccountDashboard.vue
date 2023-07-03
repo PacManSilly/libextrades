@@ -181,7 +181,7 @@ storeTransaction.getTransactions()
                     <table class="w-full table-auto border-collapse border-spacing-2">
                         <thead class="">
                             <tr class="text-slate-300">
-                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Transaction type</th>
+                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Transaction</th>
                                 <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Amount</th>
                                 <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Status</th>
                                 <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Date created</th>
