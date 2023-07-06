@@ -9,7 +9,7 @@ services:
     command: serve --listen 8080 --single /home/dockeruser/app/dist
     container_name: libextrades-web
     env_file:
-      - /home/${USER}/.env
+      - ${PWD}/.env
     environment:
       - VIRTUAL_PORT=8080
       - VIRTUAL_PATH=/
@@ -22,7 +22,7 @@ services:
     command: gunicorn --config gunicorn.conf.py src.wsgi:application
     container_name: libextrades-api
     env_file:
-      - /home/${USER}/.env
+      - ${PWD}/.env
     environment:
       - VIRTUAL_PORT=8000
       - VIRTUAL_PATH=~^/(api|admin)/
@@ -38,7 +38,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - /home/${USER}/.env
+      - ${PWD}/.env
     
   nginx-proxy:
     build:
@@ -64,7 +64,7 @@ services:
     image: nginxproxy/acme-companion:2.2
     container_name: libextrades-nginx-letsencrypt
     env_file:
-      - /home/${USER}/.env
+      - ${PWD}/.env
     volumes:
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
