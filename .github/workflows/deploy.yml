@@ -12,12 +12,9 @@ jobs:
 
   create-env-file:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v3
-
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v2.0
         with:
