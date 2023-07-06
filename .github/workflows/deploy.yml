@@ -56,19 +56,20 @@ jobs:
           envkey_NGINX_DOCKER_GEN_CONTAINER: ${{ secrets.NGINX_DOCKER_GEN_CONTAINER }}
 
 
-  # deploy-app:
+  deploy-app:
 
-  #   runs-on: self-hosted
+    runs-on: self-hosted
+    needs: create-env-file
 
-  #   steps:
-  #     - name: Checkout codebase
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v3
 
-  #     - name: Ping Hostinger :)
-  #       run:  ping -c4 hostinger.com
+      - name: Ping Hostinger :)
+        run:  ping -c4 hostinger.com
 
-  #     - name: Show docker containers
-  #       run:  docker ps -a
+      - name: Show docker containers
+        run:  docker ps -a
 
-  #     - name: Run docker compose up
-  #       run:  docker compose -f docker-compose.yml up --detach --build
+      - name: Run docker compose up
+        run:  docker compose -f docker-compose.yml up --detach --build
