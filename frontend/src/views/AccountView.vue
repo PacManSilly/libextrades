@@ -75,10 +75,8 @@ const isAuthenticated = computed(() => {
         </div>
 
 
-        
-
         <!-- is suspended effect -->
-        <div v-if="store.userData.data.is_suspended" class="absolute top-0 left-0 right-0 w-full h-full bg-white/10 backdrop-blur-md z-30">
+        <div v-if="store.userData.data.is_suspended" class="fixed top-0 left-0 right-0 w-full h-full bg-white/10 backdrop-blur-md z-30">
 
             <div class="w-10/12 h-full flex flex-col justify-center mx-auto md:w-7/12 lg:w-5/12">
 
