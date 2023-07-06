@@ -2,7 +2,7 @@
 # some times, docker-compose up (step 4) just keeps loading for some minutes
 # then stops with an error, implying that the server is not responding
 
-name: CD Deploy (Hostinger VPS)
+name: CD Deploy (VPS)
 
 on:
   workflow_dispatch:
