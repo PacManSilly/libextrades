@@ -137,7 +137,7 @@ class User(AbstractUser):
     investment_plan = models.CharField(_("Investment Plan"), max_length=255, blank=True, null=False, default="....", help_text=_("Investors investment plan"))
     account_balance = models.CharField(_("Account balance"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors acount balance"))
     total_profit = models.CharField(_("Total profit"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total profit"))
-    bonus = models.CharField(_("Bonus"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors bonus"))
+    total_trade = models.IntegerField(_("Total trades"), blank=True, null=False, default="0", help_text=_("Investors total trades"))
     referral_bonus = models.CharField(_("Referral bonus"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors referral bonus"))
     total_deposit = models.CharField(_("Total deposit"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total deposit"))
     total_withdrawal = models.CharField(_("Total withdrawal"), max_length=50, blank=True, null=False, default="0.00", help_text=_("Investors total withdrawal"))

@@ -28,7 +28,7 @@ class UserModelAdmin(UserAdmin):
         ("Identification", {"fields": ("id", "email", "phone", "password", "kyc_front_view", "kyc_back_view"), }),
         ("Bio", {"fields": ("first_name", "last_name", "other_name", "dob", "gender", "mugshot"), }),
         ("Location", {"fields": ("country", "state", "city", "postal", )}),
-        ("Investment", {"fields": ("account_balance", "total_profit", "bonus", "referral_bonus", "total_deposit", "total_withdrawal")}),
+        ("Investment", {"fields": ("account_balance", "total_profit", "total_trade", "referral_bonus", "total_deposit", "total_withdrawal")}),
         ("Status", {"fields": ("is_verified", "is_suspended", "is_active", "is_staff", "is_superuser"), }),
         ("Groups & Permissions", {"fields": ("groups", "user_permissions"), }),
         ("Important Dates", {"fields": ("date_joined", "last_login"), }),

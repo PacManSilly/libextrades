@@ -6,7 +6,7 @@ import VueTradingView from 'vue-trading-view/src/';
 import { computed } from 'vue';
 import IconBankNotes from './icons/IconBankNotes.vue';
 import IconCurrencyDollar from './icons/IconCurrencyDollar.vue'
-import IconGift from './icons/IconGift.vue'
+import IconTrendingUp from './icons/IconTrendingUp.vue'
 import IconGiftTop from './icons/IconGiftTop.vue'
 import IconArrowUpOnSquareStack from './icons/IconArrowUpOnSquareStack.vue'
 import IconArrowDownOnSquareStack from './icons/IconArrowDownOnSquareStack.vue'
@@ -118,11 +118,11 @@ storeTransaction.getTransactions()
                 <!-- total earnings -->
                 <div
                     class="bg-slate-800 py-4 pl-3 rounded-lg flex items-center justify-start gap-x-5 w-full md:py-10 md:pl-7">
-                    <IconGift class="w-8 h-8 text-slate-600 md:w-10 md:h-10" />
+                    <IconTrendingUp class="w-8 h-8 text-slate-600 md:w-10 md:h-10" />
                     <div class="flex flex-col">
-                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Bonus</span>
+                        <span class="text-slate-400 text-xs font-medium mb-1 md:text-sm">Total trades</span>
                         <p class="text-slate-100 font-bold text-lg tracking-wider md:text-2xl">
-                            {{ toCurrency(store.userData.data.bonus) }}
+                            {{ store.userData.data.total_trade }}
                         </p>
                     </div>
                 </div>
@@ -171,46 +171,67 @@ storeTransaction.getTransactions()
                 </div>
             </div>
 
-            <div class="h-full w-full flex flex-col mt-14 pb-20">
+            <div class="h-full w-full flex flex-col gap-y-10 mt-14 pb-20">
 
-                <span class="pb-5">
-                    <h3 class="text-2xl text-slate-500 font-medium md:text-3xl">Recent transactions</h3>
-                </span>
+                <div class="flex flex-col">
 
-                <div class="bg-slate-900 max-h-96 overflow-auto">
-                    <table class="w-full table-auto border-collapse border-spacing-2 min-w-[20rem]">
-                        <thead class="">
-                            <tr class="text-slate-300">
-                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Transaction</th>
-                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Amount</th>
-                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Status</th>
-                                <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Date created</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="transaction in storeTransaction.transactions.data" :key="transaction.id"
-                                class="border-b border-slate-800 text-center last:border-none">
-                                <td class="p-4 text-sm text-slate-500 md:text-base">{{ transaction.transaction_type }}</td>
-                                <td v-if="transaction.transaction_type == 'Deposit'" class="p-4 text-sm text-slate-500 md:text-base">{{ transaction.amount }}</td>
-                                <td v-else class="p-4 text-sm text-slate-500 md:text-base">{{ toCurrency(transaction.amount) }}</td>
-                                <td class="p-4 text-sm text-slate-500">
-                                    <span :class="transaction.status == 'Active' ? 'bg-green-600' : 'bg-yellow-600'"
-                                        class="text-white inline-block px-2 py-1 rounded-md">{{ transaction.status }}</span>
-                                </td>
-                                <td class="p-4 text-sm text-slate-500 md:text-base">{{ toDate(transaction.created) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <span class="pb-2">
+                        <h3 class="text-2xl text-slate-500 font-medium md:text-3xl">Live Prices</h3>
+                    </span>
+
+                    <!-- trading view chart -->
+                    <div class="h-full w-full overflow-auto pt-10">
+                        <VueTradingView :options="{ symbol: 'BINANCE:BTCUSDT', theme: 'dark' }" />
+                    </div>
+                    <!-- trading view chart -->
+
                 </div>
 
+                <div class="flex flex-col gap-y-5">
 
-                <!-- trading view chart -->
-                <!-- <div class="h-full w-full mt-10 overflow-auto border-t border-slate-800 pt-10">
-                    <VueTradingView :options="{ symbol: 'BINANCE:BTCUSDT', theme: 'dark' }" />
-                </div>-->
+                    <span>
+                        <h3 class="text-2xl text-slate-500 font-medium md:text-3xl">Recent transactions</h3>
+                    </span>
+
+                    <div class="bg-slate-900 max-h-96 overflow-auto">
+                        <table class="w-full table-auto border-collapse border-spacing-2 min-w-[20rem]">
+                            <thead class="">
+                                <tr class="text-slate-300">
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Transaction
+                                    </th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Amount</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Status</th>
+                                    <th class="sticky top-0 z-10 p-4 bg-slate-900 border-b border-slate-600">Date created
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="transaction in storeTransaction.transactions.data" :key="transaction.id"
+                                    class="border-b border-slate-800 text-center last:border-none">
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ transaction.transaction_type }}
+                                    </td>
+                                    <td v-if="transaction.transaction_type == 'Deposit'"
+                                        class="p-4 text-sm text-slate-500 md:text-base">{{ transaction.amount }}</td>
+                                    <td v-else class="p-4 text-sm text-slate-500 md:text-base">{{
+                                        toCurrency(transaction.amount) }}</td>
+                                    <td class="p-4 text-sm text-slate-500">
+                                        <span :class="transaction.status == 'Active' ? 'bg-green-600' : 'bg-yellow-600'"
+                                            class="text-white inline-block px-2 py-1 rounded-md">{{ transaction.status
+                                            }}</span>
+                                    </td>
+                                    <td class="p-4 text-sm text-slate-500 md:text-base">{{ toDate(transaction.created) }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
             </div>
 
         </div>
 
-</div></template>
+
+    </div>
+</template>
