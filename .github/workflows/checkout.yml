@@ -1,0 +1,25 @@
+# This action deploys my containerized apps. Uses docker-compose up to start app
+# some times, docker-compose up (step 4) just keeps loading for some minutes
+# then stops with an error, implying that the server is not responding
+
+name: CD Deploy (VPS)
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+
+  deploy-app:
+
+    runs-on: self-hosted
+
+    steps:
+      - name: Ping Hostinger :)
+        run:  ping -c4 hostinger.com
+
+      - name: Show docker containers
+        run:  docker ps -a
+
+      - name: Run docker compose up
+        run:  docker compose -f docker-compose.yml up --detach --build
