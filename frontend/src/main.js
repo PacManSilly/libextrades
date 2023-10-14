@@ -7,7 +7,7 @@ import axios from "axios";
 import "./assets/index.css";
 
 // axios settings
-// axios.defaults.baseURL = "http://192.168.1.104:8080/";
+// axios.defaults.baseURL = "http://127.0.0.1:8080/";
 axios.defaults.baseURL = "https://libextrades.com/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;
