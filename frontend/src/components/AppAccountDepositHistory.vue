@@ -123,8 +123,9 @@ store.getInvestments()
                                 <tr v-for="investment in store.investments.data" :key="investment.id" class="border-b border-slate-800 text-center last:border-none">
                                     <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.plan }}</td>
                                     <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.amount }}</td>
-                                    <td class="p-4 text-sm text-slate-500">
+                                    <td class="p-4 text-sm text-slate-500 flex flex-col items-center justify-center gap-y-2">
                                         <span :class="investment.status == 'Active' ? 'bg-green-600':'bg-yellow-600'" class="text-white inline-block px-2 py-1 rounded-md">{{ investment.status }}</span>
+                                        <button v-if="investment.status == 'Pending'" type="button" @click.prevent="deposit(investment.id)" class="text-green-500 transition-all duration-150 hover:text-green-600">Pay now</button>
                                     </td>
                                     <td class="p-4 text-sm text-slate-500 md:text-base">{{ toDate(investment.created) }}</td>
                                     <td class="p-4 text-sm text-slate-500 md:text-base">{{ investment.days }}</td>
